@@ -191,6 +191,44 @@ function addStudent() {
 
 
 
+const updurl = "http://localhost:8080/API-DATA-TESTING-BACKEND/resources/student/updateStudent";
+
+function updateStudent() {
+    const person = {
+        "id": document.getElementById("id").value,
+        "name": document.getElementById("name").value,
+        "college": document.getElementById("college").value,
+        "branch": document.getElementById("branch").value
+    };
+
+    const options = {
+        method: "PUT",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify(person)
+    };
+
+    fetch(updurl, options)
+        .then(response => {
+            if (response.status === 200) {
+                // Display a success message in the apiResponse div
+                alert("Student successfully updated!");
+                apiResponse.innerHTML = "Student successfully updated!";
+            } else {
+                // Handle other status codes here
+                apiResponse.innerHTML = "Error updating student.";
+                throw new Error("Error: " + response.status);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+
+
+
 
 
 

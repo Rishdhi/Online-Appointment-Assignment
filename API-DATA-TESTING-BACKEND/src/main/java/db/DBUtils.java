@@ -103,7 +103,29 @@ public class DBUtils {
         }     
        
         return student;
-    } 
+    }
+    
+    
+        public boolean updateStudent(Student student) {
+          try {
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+            try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                Statement stmt = conn.createStatement();
+             ) {		      
+               stmt.executeUpdate("UPDATE student SET name = '" 
+                       + student.getName() + 
+                       "', college = '" + student.getCollege() +
+                       "', branch = '" + student.getBranch()
+                       + "' WHERE (id = '" + student.getId()+ "')");
+               return true;
+             } catch (SQLException e) {
+                 System.out.println(e);
+             } 
+        } catch(SQLException e) {
+            System.out.println(e);
+        }     
+        return false;
+    }
     
     
     

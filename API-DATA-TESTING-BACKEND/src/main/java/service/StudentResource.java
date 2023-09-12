@@ -69,6 +69,25 @@ public class StudentResource {
         }   
     }
     
+    
+    
+    
+    @PUT
+    @Path("/updateStudent")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateStudent(String json) {
+        Gson gson = new GsonBuilder().create();
+        Student student = gson.fromJson(json, Student.class);
+        
+        DBUtils utils = new DBUtils(); 
+        boolean result = utils.updateStudent(student);
+        if (result) {
+            return Response.status(200).entity("Student successfully updated").build();
+        } else {
+            return Response.status(500).entity("Student Not updated").build();
+        }
+    }
+    
 
     /**
      * Creates a new instance of StudentResource
