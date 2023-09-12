@@ -260,6 +260,16 @@ function deleteStudent() {
 
 
 
+function clearStudent() {
+            document.getElementById("id").value = "";
+            document.getElementById("name").value = "";
+            document.getElementById("college").value = "";
+            document.getElementById("branch").value = "";
+        }
+
+
+
+
 
 
 
