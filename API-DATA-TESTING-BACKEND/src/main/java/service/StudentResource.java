@@ -24,6 +24,7 @@ import db.DBUtils;
 import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PathParam;
@@ -169,6 +170,19 @@ public Response getStudents() {
         if (result) {
             String successMessage = "Student successfully added!";
             return Response.status(201).entity(successMessage).build();
+        } else {
+            return Response.status(500).build();
+        }
+    }
+    
+    
+    @DELETE
+    @Path("{id}")
+    public Response deleteStudent(@PathParam("id") int id) {
+        DBUtils utils = new DBUtils(); 
+        boolean result = utils.deleteStudent(id);
+        if (result) {
+            return Response.status(200).build();
         } else {
             return Response.status(500).build();
         }

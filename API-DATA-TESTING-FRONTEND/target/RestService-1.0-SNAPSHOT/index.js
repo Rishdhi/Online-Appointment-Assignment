@@ -231,6 +231,36 @@ function updateStudent() {
 
 
 
+function deleteStudent() {
+            let id = document.getElementById("id").value;
+            
+            const deleteUrl = `http://localhost:8080/API-DATA-TESTING-BACKEND/resources/student/${id}`;
+            const options = {
+                    method : "DELETE"
+            };
+            
+            fetch(deleteUrl, options)
+            
+            .then(response => {
+        if (response.status === 200) {
+            // Display a success message or handle as needed
+            alert("Student deleted successfully!");
+        } else {
+            // Handle other status codes here
+            alert("Error deleting student.");
+            throw new Error("Error: " + response.status);
+        }
+    })
+    .catch(error => {
+        console.error(error);
+    });
+}
+
+
+
+
+
+
 
 
 

@@ -126,7 +126,22 @@ public class DBUtils {
         }     
         return false;
     }
-    
-    
-    
-}
+        
+        
+    public boolean deleteStudent(int id) {
+          try {
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+            try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                Statement stmt = conn.createStatement();
+             ) {		      
+               stmt.executeUpdate("DELETE FROM student WHERE (id = '" + id + "')");
+               return true;
+             } catch (SQLException e) {
+                 System.out.println(e);
+             } 
+        } catch(SQLException e) {
+            System.out.println(e);
+        }     
+        return false;
+    }
+}    
