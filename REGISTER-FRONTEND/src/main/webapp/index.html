@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <h1>Student Registration</h1>
+        <!-- Your HTML content here -->
+        <button id="testButton">Test API</button>
+        <div id="apiResponse"></div>
+        
+
+                <label for="name">Name:</label>
+            <input type="text" id="name" required><br><br>
+            
+            <label for="name">Number:</label>
+            <input type="text" id="txtNum" required><br><br>
+
+            <label for="college">Email:</label>
+            <input type="text" id="txtMail" required><br><br>
+            
+            <label for="college">Password:</label>
+            <input type="text" id="txtPass" required><br><br>
+            
+            <select id="signupUserType" >
+                <option value="Administrator">Administrator</option>
+                <option value="Consultant" >Consultant</option>
+                <option value="Job Seeker" >Job Seeker</option>
+            </select><br><br>
+
+
+            
+            <button id="btnGetUser" onclick="getStudent()">Get User</button>
+
+            <button id="btnAddUser" onclick="addUser()">Register</button>
+            
+            <button id="btnUpdateUser" onclick="updateStudent()">Update User</button>
+            
+            <button id="btnDeleteUser" onclick="deleteStudent()">Delete User</button>
+            
+            <button id='btnClearUser' onclick='clearStudent()'>Clear</button>
+
+
+
+
+
+        <script src="./index.js"></script>
+
+    </body>
+</html>

@@ -1,5 +1,0 @@
-Classes\Student.class
-service\RestService.class
-service\StudentResource.class
-com\mycompany\restservice\JAXRSConfiguration.class
-com\mycompany\restservice\resources\JavaEE8Resource.class

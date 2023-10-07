@@ -1,9 +1,0 @@
-service\DatabasetojsonResource.class
-service\AbstractFacade.class
-db\DBUtils.class
-Classes\Student.class
-service\RestService.class
-service\StudentResource.class
-db\StudentRepository.class
-com\mycompany\restservice\JAXRSConfiguration.class
-com\mycompany\restservice\resources\JavaEE8Resource.class
