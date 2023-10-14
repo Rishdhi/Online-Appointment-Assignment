@@ -1,49 +1,39 @@
 <!DOCTYPE html>
-<html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html lang="en">
     <head>
-        <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Responsive Login and Signup Form </title>
+
+        <!-- CSS -->
         <link rel="stylesheet" href="./styles.css">
+                
+        <!-- Boxicons CSS -->
+        <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+         <link rel="icon" type="image/png" href="./images/consult.png">
     </head>
     <body>
-        <h1>Student Registration</h1>
-        <!-- Your HTML content here -->
-        <button id="testButton">Test API</button>
-        <div id="apiResponse"></div>
         
-<!--
-            <label for="name">Name:</label>
-            <input type="text" id="name" required><br><br>
-            
-            <label for="name">Number:</label>
-            <input type="text" id="txtNum" required><br><br>
+                <header>
+            <div class="logo">
+                <img src="images/consultease-logo.png" alt="Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
 
-            <label for="college">Email:</label>
-            <input type="text" id="txtMail" required><br><br>
-            
-            <label for="college">Password:</label>
-            <input type="text" id="txtPass" required><br><br>
-            
-            <select id="signupUserType" >
-                <option value="Administrator">Administrator</option>
-                <option value="Consultant" >Consultant</option>
-                <option value="Job Seeker" >Job Seeker</option>
-            </select><br><br>
-            
-           
-            
-            <button id="btnGetUser" onclick="getStudent()">Get User</button>
-
-            <button id="btnAddUser" onclick="addUser()">Register</button>
-            
-            <button id="btnUpdateUser" onclick="updateStudent()">Update User</button>
-            
-            <button id="btnDeleteUser" onclick="deleteStudent()">Delete User</button>
-            
-            <button id='btnClearUser' onclick='clearStudent()'>Clear</button>-->
-
-
-
+        
+<!--        
 <section class="containerlog forms">
     <div class="form login">
         <div class="form-content">
@@ -60,7 +50,7 @@
 
                 <div class="field input-field">
                     <select class="input" id="loginUserType">
-<!--                        <option value="Administrator">Administrator</option>-->
+                        <option value="Administrator">Administrator</option>
                         <option value="Consultant">Consultant</option>
                         <option value="Job Seeker">Job Seeker</option>
                     </select>
@@ -80,10 +70,8 @@
             </div>
         </div>
     </div>
-    
-    
-    
-        Signup Form 
+
+     Signup Form 
     <div class="form signup">
         <div class="form-content">
             <header>Signup</header>
@@ -129,46 +117,21 @@
             </div>
         </div>
     </div>
-</section>
+</section>-->
+        
+        
+        
+                <footer>
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Use</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+            <p>&copy; 2023 Consultease. All rights reserved.</p>
+        </footer>
 
 
-<!--
-            <label for="name">Name:</label>
-            <input type="text" id="name" required><br><br>
-            
-            <label for="name">Number:</label>
-            <input type="text" id="txtNum" required><br><br>
-
-            <label for="college">Email:</label>
-            <input type="text" id="txtMail" required><br><br>
-            
-            <label for="college">Password:</label>
-            <input type="text" id="txtPass" required><br><br>
-            
-            <select id="signupUserType" >
-                <option value="Administrator">Administrator</option>
-                <option value="Consultant" >Consultant</option>
-                <option value="Job Seeker" >Job Seeker</option>
-            </select><br><br>
-            
-           
-            
-            <button id="btnGetUser" onclick="getStudent()">Get User</button>
-
-            <button id="btnAddUser" onclick="addUser()">Register</button>
-            
-            <button id="btnUpdateUser" onclick="updateStudent()">Update User</button>
-            
-            <button id="btnDeleteUser" onclick="deleteStudent()">Delete User</button>
-            
-            <button id='btnClearUser' onclick='clearStudent()'>Clear</button>-->
-
-
-            <a href="./login_and_register.html" target="target">Login and Register</a>
-
-
-
+        <!-- JavaScript -->
         <script src="./index.js"></script>
-
     </body>
 </html>
