@@ -41,15 +41,15 @@ public class UserResource {
 //    @Context
 //    private UriInfo context;
 //    
-//        // Register the MySQL JDBC driver in a static block
-//    static {
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//            throw new RuntimeException("Failed to register MySQL JDBC driver.");
-//        }
-//    }
+        // Register the MySQL JDBC driver in a static block
+    static {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to register MySQL JDBC driver.");
+        }
+    }
 //    
 //    @GET
 //    @Produces(MediaType.APPLICATION_JSON)
@@ -91,51 +91,108 @@ public class UserResource {
 //    
 //
 //
+//
+
+
+
+    
+//@GET
+//@Path("/getStudents")
+//@Produces(MediaType.APPLICATION_JSON)
+//public Response getStudents() {
+//    // Create an instance of your DBUtils class
+//    DBUtils utils = new DBUtils();
 //    
-@GET
-@Path("/getStudents")
-@Produces(MediaType.APPLICATION_JSON)
-public Response getStudents() {
-    // Create an instance of your DBUtils class
-    DBUtils utils = new DBUtils();
+//    // Call a method to retrieve a list of students from the database
+//    List<User> users = utils.getUsers();
+//    
+//    // Check if students were retrieved successfully
+//    if (users != null && !users.isEmpty()) {
+//        // Create a StringBuilder to build a JSON array manually
+//        StringBuilder jsonBuilder = new StringBuilder();
+//        jsonBuilder.append("[");
+//        
+//        // Iterate through the list of students and add each student as a JSON object
+//        for (User user : users) {
+//            String userJson = "{\"id\":" + user.getId() + 
+//                                 ",\"username\":\"" + user.getUsername()+ "\"" +
+//                                 ",\"contact_number\":\"" + user.getContact_number()+ "\"" +
+//                                 ",\"email\":\"" + user.getEmail()+ "\"" +
+//                                 ",\"password\":\"" + user.getPassword()+ "\"" +
+//                                 ",\"usertype\":\"" + user.getUser_type()+ "\"}";
+//            
+//            jsonBuilder.append(userJson);
+//            jsonBuilder.append(",");
+//        }
+//        
+//        // Remove the trailing comma and close the JSON array
+//        if (jsonBuilder.charAt(jsonBuilder.length() - 1) == ',') {
+//            jsonBuilder.deleteCharAt(jsonBuilder.length() - 1);
+//        }
+//        jsonBuilder.append("]");
+//        
+//        // Return a response with a 200 status code and the JSON data
+//        return Response.status(200).entity(jsonBuilder.toString()).build();
+//    } else {
+//        // If no students were found, return a response with a 404 status code
+//        return Response.status(404).entity("No users found").build();
+//    }
+//}
+
     
-    // Call a method to retrieve a list of students from the database
-    List<User> users = utils.getUsers();
+//@POST
+//    @Path("/login")    
+//public Response login(User user) {
+//        if (DBUtils.authenticateUser(user.getEmail(), user.getPassword(), user.getUser_type())) {
+//            // Return a success response with a 200 OK status code
+//            return Response.status(Response.Status.OK).entity("Logged in successfully").build();
+//        } else {
+//            // Return a failure response with a 401 Unauthorized status code
+//            return Response.status(Response.Status.UNAUTHORIZED).entity("Login failed").build();
+//        }
+//    }
+//
+
     
-    // Check if students were retrieved successfully
-    if (users != null && !users.isEmpty()) {
-        // Create a StringBuilder to build a JSON array manually
-        StringBuilder jsonBuilder = new StringBuilder();
-        jsonBuilder.append("[");
-        
-        // Iterate through the list of students and add each student as a JSON object
-        for (User user : users) {
-            String userJson = "{\"id\":" + user.getId() + 
-                                 ",\"username\":\"" + user.getUsername()+ "\"" +
-                                 ",\"contact_number\":\"" + user.getContact_number()+ "\"" +
-                                 ",\"email\":\"" + user.getEmail()+ "\"" +
-                                 ",\"password\":\"" + user.getPassword()+ "\"" +
-                                 ",\"usertype\":\"" + user.getUser_type()+ "\"}";
-            
-            jsonBuilder.append(userJson);
-            jsonBuilder.append(",");
+    
+    @POST
+    @Path("authenticate")
+    @Consumes(MediaType.APPLICATION_JSON)
+public Response authenticateUser(User user) {
+        if (DBUtils.authenticateUser(user)) {
+        // Authentication successful
+        String userType = user.getUser_type();
+        String redirectUrl;
+
+        if ("Administrator".equals(userType)) {
+            redirectUrl = "admin_dashboard.html";
+        } else if ("Consultant".equals(userType)) {
+            redirectUrl = "consultant_dashboard.html";
+        } else if ("Job Seeker".equals(userType)) {
+            redirectUrl = "job_seeker_dashboard.html";
+        } else {
+            // Handle unknown user types here
+            return Response.status(Response.Status.UNAUTHORIZED)
+                    .entity("Unknown user type")
+                    .build();
         }
-        
-        // Remove the trailing comma and close the JSON array
-        if (jsonBuilder.charAt(jsonBuilder.length() - 1) == ',') {
-            jsonBuilder.deleteCharAt(jsonBuilder.length() - 1);
-        }
-        jsonBuilder.append("]");
-        
-        // Return a response with a 200 status code and the JSON data
-        return Response.status(200).entity(jsonBuilder.toString()).build();
+
+        // Return a JSON response with the redirect URL
+        return Response.status(Response.Status.OK)
+                .entity("{\"redirect\":\"" + redirectUrl + "\"}")
+                .build();
     } else {
-        // If no students were found, return a response with a 404 status code
-        return Response.status(404).entity("No users found").build();
+        // Authentication failed
+        return Response.status(Response.Status.UNAUTHORIZED)
+                .entity("Login failed by api")
+                .build();
     }
-}
-
-
+    }
+    
+    
+    
+    
+    
     
 
      //.Add a new method to handle saving a student
@@ -150,7 +207,7 @@ public Response getStudents() {
         boolean result = utils.addUser(user);
         if (result) {
             String successMessage = "User successfully added!";
-            return Response.status(201).entity(successMessage).build();
+            return Response.status(201).build();
         } else {
             return Response.status(500).build();
         }
