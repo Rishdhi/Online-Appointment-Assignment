@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./dashboard.css">
+    </head>
+    <body>
+        <header>
+        <h1>Job Seeker Dashboard</h1>
+    </header>
+    <section id="consultants">
+        <h2>Browse Available Consultants:</h2>
+        <ul>
+            <li>
+                <div class="consultant">
+                    <h3>Consultant 1</h3>
+                    <p>Expertise: Resume Writing</p>
+                    <button class="view-details">View Details</button>
+                    <button class="request-appointment">Request Appointment</button>
+                </div>
+            </li>
+            <li>
+                <div class="consultant">
+                    <h3>Consultant 2</h3>
+                    <p>Expertise: Interview Coaching</p>
+                    <button class="view-details">View Details</button>
+                    <button class="request-appointment">Request Appointment</button>
+                </div>
+            </li>
+            <!-- Add more consultant profiles here -->
+        </ul>
+    </section>
+    <section id="appointment-form" class="hidden">
+        <h2>Request an Appointment:</h2>
+        <form id="appointment-request-form">
+            <label for="consultant-select">Choose a Consultant:</label>
+            <select id="consultant-select" name="consultant">
+                <option value="consultant1">Consultant 1</option>
+                <option value="consultant2">Consultant 2</option>
+                <!-- Add more consultant options here -->
+            </select>
+            <br>
+            <label for="appointment-date">Appointment Date:</label>
+            <input type="date" id="appointment-date" name="appointmentDate">
+            <br>
+            <label for="appointment-time">Appointment Time:</label>
+            <input type="time" id="appointment-time" name="appointmentTime">
+            <br>
+            <label for="contact-info">Your Contact Information:</label>
+            <input type="text" id="contact-info" name="contactInfo">
+            <br>
+            <input type="submit" value="Submit Request">
+        </form>
+    </section>
+    <section id="confirmation-message" class="hidden">
+        <h2>Appointment Request Confirmation:</h2>
+        <p>Your appointment request has been submitted.</p>
+    </section>
+    <section id="appointment-status" class="hidden">
+        <h2>Appointment Status:</h2>
+        <p>Status: <strong>Pending</strong></p>
+    </section>
+        
+        
+        
+         <h1>Welcome to the Job Seeker Application</h1> <h2>Browse Available Consultants</h2> <ul> <li><a href="consultant-profile.html">Consultant 1</a></li> <li><a href="consultant-profile.html">Consultant 2</a></li> <li><a href="consultant-profile.html">Consultant 3</a></li> </ul> <h2>Consultant Profile</h2> <h3>Consultant 1</h3> <p>Expertise: Software Development</p> <p>Click below to view more details:</p> <a href="consultant-details.html">View Details</a> <h2>Appointment Request</h2> <form action="appointment-request.php" method="post"> <label for="date">Date:</label> <input type="date" id="date" name="date" required><br><br> <label for="time">Time:</label> <input type="time" id="time" name="time" required><br><br> <label for="name">Name:</label> <input type="text" id="name" name="name" required><br><br> <label for="email">Email:</label> <input type="email" id="email" name="email" required><br><br> <label for="phone">Phone:</label> <input type="tel" id="phone" name="phone" required><br><br> <input type="submit" value="Submit"> </form> <h2>Confirmation of Appointment Request</h2> <p>Your appointment request has been submitted. You will receive a confirmation email shortly.</p> <h2>Request Status</h2> <p>Status: Accepted</p> <h2>Attend the Scheduled Appointment</h2> <p>Make sure to attend the appointment on the provided date and time.</p> <h2>Post-Appointment Feedback</h2> <form action="post-appointment-feedback.php" method="post"> <label for="rating">Rating (1-5):</label> <input type="number" id="rating" name="rating" min="1" max="5" required><br><br> <label for="feedback">Feedback:</label><br> <textarea id="feedback" name="feedback" rows="4" cols="50"></textarea><br><br> <input type="submit" value="Submit"> </form>
+        
+        
+    </body>
+</html>
