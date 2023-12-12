@@ -25,6 +25,19 @@ public class DBUtils {
     static final String USER = "root";
     static final String PASS = "t#9758@qlphsemi";
     
+    
+    
+    public static Connection establishConnection() {
+        Connection connection = null;
+        try {
+            // Attempt to establish a connection
+            connection = DriverManager.getConnection(DB_URL, USER, PASS);
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle or log the exception as needed
+        }
+        return connection;
+    }
+    
 
 //    public List<User> getUsers() {
 //        List<User> users = new ArrayList<>();
@@ -84,22 +97,22 @@ public class DBUtils {
 
 
 public static boolean authenticateUser(User user) {
-    try {
-        Class.forName("com.mysql.jdbc.Driver");
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-             PreparedStatement stmt = 
-      conn.prepareStatement("SELECT email, password, user_type FROM users WHERE email = ? AND password = ? AND user_type = ?")) {
-            stmt.setString(1, user.getEmail());
-            stmt.setString(2, user.getPassword());
-            stmt.setString(3, user.getUser_type());
-
-            try (ResultSet rs = stmt.executeQuery()) {
-                return rs.next(); // If there's a matching user, authentication is successful
-            }
-        } catch (SQLException e) {
-        }
-    } catch (ClassNotFoundException e) {
-    }
+//    try {
+//        Class.forName("com.mysql.jdbc.Driver");
+//        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+//             PreparedStatement stmt = 
+//      conn.prepareStatement("SELECT email, password, user_type FROM users WHERE email = ? AND password = ? AND user_type = ?")) {
+//            stmt.setString(1, user.getEmail());
+//            stmt.setString(2, user.getPassword());
+//            stmt.setString(3, user.getUser_type());
+//
+//            try (ResultSet rs = stmt.executeQuery()) {
+//                return rs.next(); // If there's a matching user, authentication is successful
+//            }
+//        } catch (SQLException e) {
+//        }
+//    } catch (ClassNotFoundException e) {
+//    }
     return false;
 }
 

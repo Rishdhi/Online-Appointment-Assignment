@@ -1,3 +1,4 @@
+Classes\AppointmentData.class
 service\DatabasetojsonResource.class
 service\AbstractFacade.class
 db\DBUtils.class
