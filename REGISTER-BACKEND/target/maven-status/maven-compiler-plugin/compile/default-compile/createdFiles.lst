@@ -2,6 +2,7 @@ Classes\AppointmentData.class
 service\DatabasetojsonResource.class
 service\AbstractFacade.class
 db\DBUtils.class
+Classes\User_Cyber_Security.class
 Classes\User.class
 service\RestService.class
 service\UserResource.class

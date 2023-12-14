@@ -14,6 +14,7 @@ import javax.ws.rs.PUT;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.core.MediaType;
 import Classes.User;
+import Classes.User_Cyber_Security;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -205,6 +206,27 @@ public Response authenticateUser(User user) {
         
         DBUtils utils = new DBUtils(); 
         boolean result = utils.addUser(user);
+        if (result) {
+            String successMessage = "User successfully added!";
+            return Response.status(201).build();
+        } else {
+            return Response.status(500).build();
+        }
+    }
+    
+    
+    
+    
+         //.Add a new method to handle saving a cyber security user
+    @POST
+    @Path("/addcyberuser")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addCyberSecurityUser(String json) {
+        Gson gson = new GsonBuilder().create();
+        User_Cyber_Security user = gson.fromJson(json, User_Cyber_Security.class);
+        
+        DBUtils utils = new DBUtils(); 
+        boolean result = utils.addCyberSecurityUser(user);
         if (result) {
             String successMessage = "User successfully added!";
             return Response.status(201).build();

@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import Classes.User;
+import Classes.User_Cyber_Security;
 import java.sql.PreparedStatement;
 
 /**
@@ -69,34 +70,34 @@ public class DBUtils {
 //    }
     
     
-//public static boolean authenticateUser(User user) {
-//    try {
-//        Class.forName("com.mysql.jdbc.Driver");
-//        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-//             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE email = ? AND password = ? AND user_type = ?")) {
-//            stmt.setString(1, user.getEmail());
-//            stmt.setString(2, user.getPassword());
-//            stmt.setString(3, user.getUser_type());
-//
-//            try (ResultSet rs = stmt.executeQuery()) {
-//                return rs.next(); // If there's a matching user, authentication is successful
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    } catch (ClassNotFoundException e) {
-//        e.printStackTrace();
-//    }
-//    return false;
-//}
-
-
-
-
-
-
-
 public static boolean authenticateUser(User user) {
+    try {
+        Class.forName("com.mysql.jdbc.Driver");
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE email = ? AND password = ? AND user_type = ?")) {
+            stmt.setString(1, user.getEmail());
+            stmt.setString(2, user.getPassword());
+            stmt.setString(3, user.getUser_type());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next(); // If there's a matching user, authentication is successful
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+    }
+    return false;
+}
+
+
+
+
+
+
+
+//public static boolean authenticateUser(User user) {
 //    try {
 //        Class.forName("com.mysql.jdbc.Driver");
 //        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -113,8 +114,8 @@ public static boolean authenticateUser(User user) {
 //        }
 //    } catch (ClassNotFoundException e) {
 //    }
-    return false;
-}
+//    return false; // comment everything above and keep this for test to fail on purpose
+//}
 
 
 
@@ -193,6 +194,40 @@ public static boolean authenticateUser(User user) {
             pstmt.setString(3, user.getEmail());
             pstmt.setString(4, user.getPassword());
             pstmt.setString(5, user.getUser_type());
+            
+            // Execute the insert statement
+            int rowsInserted = pstmt.executeUpdate();
+            
+            // Close the connection
+            conn.close();
+            
+            // Check if the insert was successful
+            return rowsInserted > 0;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+ 
+ 
+ 
+ 
+ 
+ 
+    public boolean addCyberSecurityUser(User_Cyber_Security cyber_user) {
+        try {
+            // Create a database connection
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            
+            // Prepare the SQL statement
+            String sql = "INSERT INTO users_cyber_security (username, contact_number, email, password, user_type) "
+                    + "VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, cyber_user.getCusername());
+            pstmt.setInt(2, cyber_user.getCcontact_number());
+            pstmt.setString(3, cyber_user.getCemail());
+            pstmt.setString(4, cyber_user.getCpassword());
+            pstmt.setString(5, cyber_user.getCuser_type());
             
             // Execute the insert statement
             int rowsInserted = pstmt.executeUpdate();
