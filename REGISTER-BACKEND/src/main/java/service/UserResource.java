@@ -159,7 +159,7 @@ public class UserResource {
     @POST
     @Path("authenticate")
     @Consumes(MediaType.APPLICATION_JSON)
-public Response authenticateUser(User user) {
+    public Response authenticateUser(User user) {
         if (DBUtils.authenticateUser(user)) {
         // Authentication successful
         String userType = user.getUser_type();

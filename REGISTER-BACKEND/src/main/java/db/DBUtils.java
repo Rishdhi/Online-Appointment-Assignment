@@ -94,6 +94,30 @@ public static boolean authenticateUser(User user) {
 
 
 
+public static boolean authenticateCyberUser(User_Cyber_Security cyber_user) {
+    try {
+        Class.forName("com.mysql.jdbc.Driver");
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users_cyber_security WHERE email = ? AND password = ? AND user_type = ?")) {
+            stmt.setString(1, cyber_user.getCemail());
+            stmt.setString(2, cyber_user.getCpassword());
+            stmt.setString(3, cyber_user.getCuser_type());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next(); // If there's a matching user, authentication is successful
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+    }
+    return false;
+}
+
+
+
+
 
 
 
