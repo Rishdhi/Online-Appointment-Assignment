@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--        <link rel="stylesheet" href="./dashboard.css">-->
+<style> body { font-family: Arial, sans-serif; background-color: #f2f2f2; } 
+    h1 { color: #333; } 
+    .container { max-width: 900px; margin: 0 auto; padding: 40px; background-color: #fff; } 
+    .button { padding: 10px 20px; background-color: #333; color: #fff; border: none; border-radius: 4px; cursor: pointer; } 
+    .appointments { margin-top: 20px; border-collapse: collapse; width: 100%; } 
+    .appointments th, .appointments td { padding: 10px; border-bottom: 1px solid #ddd; text-align: left; } 
+    .appointments th { background-color: #333; color: #fff; } 
+</style>
+    </head>
+    <body>
+        <header>
+        <h1>Job Seeker Dashboard</h1>
+    </header>
+    <section id="consultants">
+        <h2>Browse Available Consultants:</h2>
+        <ul>
+            <li>
+                <div class="consultant">
+                    <h3>Consultant 1</h3>
+                    <p>Expertise: Resume Writing</p>
+                    <button class="view-details">View Details</button>
+                    <button class="request-appointment">Request Appointment</button>
+                </div>
+            </li>
+            <li>
+                <div class="consultant">
+                    <h3>Consultant 2</h3>
+                    <p>Expertise: Interview Coaching</p>
+                    <button class="view-details">View Details</button>
+                    <button class="request-appointment">Request Appointment</button>
+                </div>
+            </li>
+            <!-- Add more consultant profiles here -->
+        </ul>
+    </section>
+    <section id="appointment-form" class="hidden">
+        <h2>Request an Appointment:</h2>
+        <form id="appointment-request-form">
+            <label for="consultant-select">Choose a Consultant:</label>
+            <select id="consultant-select" name="consultant">
+                <option value="consultant1">Consultant 1</option>
+                <option value="consultant2">Consultant 2</option>
+                <!-- Add more consultant options here -->
+            </select>
+            <br>
+            <label for="appointment-date">Appointment Date:</label>
+            <input type="date" id="appointment-date" name="appointmentDate">
+            <br>
+            <label for="appointment-time">Appointment Time:</label>
+            <input type="time" id="appointment-time" name="appointmentTime">
+            <br>
+            <label for="contact-info">Your Contact Information:</label>
+            <input type="text" id="contact-info" name="contactInfo">
+            <br>
+            <input type="submit" value="Submit Request">
+        </form>
+    </section>
+    <section id="confirmation-message" class="hidden">
+        <h2>Appointment Request Confirmation:</h2>
+        <p>Your appointment request has been submitted.</p>
+    </section>
+    <section id="appointment-status" class="hidden">
+        <h2>Appointment Status:</h2>
+        <p>Status: <strong>Pending</strong></p>
+    </section>
+        
+        
+        
+         <h1>Welcome to the Job Seeker Application</h1> 
+         <h2>Browse Available Consultants</h2> <ul> <li><a href="consultant-profile.html">
+                     Consultant 1</a></li> 
+                     <li><a href="consultant-profile.html">Consultant 2</a></li> <li><a href="consultant-profile.html">Consultant 3</a></li> </ul> <h2>Consultant Profile</h2> <h3>Consultant 1</h3> <p>Expertise: Software Development</p> <p>Click below to view more details:</p> <a href="consultant-details.html">View Details</a> <h2>Appointment Request</h2> <form action="appointment-request.php" method="post"> <label for="date">Date:</label> <input type="date" id="date" name="date" required><br><br> <label for="time">Time:</label> <input type="time" id="time" name="time" required><br><br> <label for="name">Name:</label> <input type="text" id="name" name="name" required><br><br> <label for="email">Email:</label> <input type="email" id="email" name="email" required><br><br> <label for="phone">Phone:</label> <input type="tel" id="phone" name="phone" required><br><br> <input type="submit" value="Submit"> </form> <h2>Confirmation of Appointment Request</h2> <p>Your appointment request has been submitted. You will receive a confirmation email shortly.</p> <h2>Request Status</h2> <p>Status: Accepted</p> <h2>Attend the Scheduled Appointment</h2> <p>Make sure to attend the appointment on the provided date and time.</p> <h2>Post-Appointment Feedback</h2> <form action="post-appointment-feedback.php" method="post"> <label for="rating">Rating (1-5):</label> <input type="number" id="rating" name="rating" min="1" max="5" required><br><br> <label for="feedback">Feedback:</label><br> <textarea id="feedback" name="feedback" rows="4" cols="50"></textarea><br><br> <input type="submit" value="Submit"> </form>
+        
+        
+                     
+        <div class="container"> 
+            <h1>Job Seekers Page</h1>
+            <h2>Appointment Requests</h2>
+	<table class="appointments">
+		<tr>
+			<th>Date</th>
+			<th>Time</th>
+			<th>Job Seeker</th>
+			<th>Actions</th>
+		</tr>
+		<tr>
+			<td>2022-01-10</td>
+			<td>09:00 AM</td>
+			<td>John Smith</td>
+			<td>
+				<button class="button">Accept</button>
+				<button class="button">Reject</button>
+			</td>
+		</tr>
+		<tr>
+			<td>2022-01-12</td>
+			<td>03:00 PM</td>
+			<td>Jane Doe</td>
+			<td>
+				<button class="button">Accept</button>
+				<button class="button">Reject</button>
+			</td>
+		</tr>
+	</table>
+	
+	<h2>Schedule New Appointment</h2>
+	<form>
+		<label for="date">Date:</label>
+		<input type="date" id="date" name="date">
+		<label for="time">Time:</label>
+		<input type="time" id="time" name="time">
+		<label for="jobSeeker">Job Seeker:</label>
+		<input type="text" id="jobSeeker" name="jobSeeker">
+		<input type="submit" value="Schedule" class="button">
+	</form>
+	
+	<h2>Upcoming Appointments</h2>
+	<table class="appointments">
+		<tr>
+			<th>Date</th>
+			<th>Time</th>
+			<th>Job Seeker</th>
+			<th>Status</th>
+		</tr>
+		<tr>
+			<td>2022-01-15</td>
+			<td>02:00 PM</td>
+			<td>Robert Johnson</td>
+			<td>Upcoming</td>
+		</tr>
+		<tr>
+			<td>2022-01-18</td>
+			<td>10:30 AM</td>
+			<td>Amy Wilson</td>
+			<td>Upcoming</td>
+		</tr>
+	</table>
+</div>
+                  
+                     
+                     
+                     
+                     <h1>DATA TABLE TESTING</h1>
+                     
+                     
+                     
+                     
+                         <div class="container">
+        <h1>User Table</h1>
+        <table id="userTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Number</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- User records will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+                     
+                     
+                     
+                     
+                     
+                     
+                         <form id="jobSeekerForm">
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required><br>
+
+        <label for="consultant">Select Consultant:</label>
+        <select id="consultant" name="consultant">
+            <option value="consultant1">Consultant 1</option>
+            <option value="consultant2">Consultant 2</option>
+            <option value="consultant3">Consultant 3</option>
+            <option value="consultant4">Consultant 4</option>
+            <option value="consultant5">Consultant 5</option>
+        </select><br>
+
+        <button type="button" onclick="submitForm()">Book Appointment</button>
+    </form>
+
+    <script>
+        function submitForm() {
+            // Get form values
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const selectedConsultant = document.getElementById('consultant').value;
+
+            // You can now send these values to your backend (Java) using AJAX or fetch API
+            // For simplicity, let's log them to the console
+            console.log('Full Name:', fullName);
+            console.log('Email:', email);
+            console.log('Phone:', phone);
+            console.log('Selected Consultant:', selectedConsultant);
+
+            // You can add logic to send this data to your Java backend and handle the response
+            // For now, let's just alert a success message
+            alert('Appointment booked successfully!');
+
+        }
+    </script>
+                     
+                     
+                     
+    </body>
+</html>

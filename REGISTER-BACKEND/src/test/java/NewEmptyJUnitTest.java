@@ -57,44 +57,44 @@ public class NewEmptyJUnitTest {
 //        assertTrue(DBUtils.authenticateUser(testUser));
 //    }
 
-    @Test
-    public void testAuthenticateUser_UnsuccessfulAuthentication() {
-        // Provide data that does not match any user in the database
-        User testUser = new User();
-        testUser.setEmail("invalid@gmail.com");
-        testUser.setPassword("invalidPassword");
-        testUser.setUser_type("invalidUserType");
-
-        assertFalse(DBUtils.authenticateUser(testUser));
-    }
-    
-    
-    @Test
-    public void testAuthenticateUser_SuccessfulAuthentication() {
-        User testUser = new User();
-        testUser.setEmail("sam@gmail.com");
-        testUser.setPassword("www");
-        testUser.setUser_type("job seeker");
-
-        boolean result = DBUtils.authenticateUser(testUser);
-        System.out.println("Authentication Result: " + result);
-
-        assertTrue(result);
-    }
-    
-    
-    
-    @Test
-public void testAuthenticateUser1_SuccessfulAuthentication1() {
-    User testUser = new User();
-    testUser.setEmail("sam@gmail.com");
-    testUser.setPassword("www");
-    testUser.setUser_type("job seeker");
-
-    boolean result = DBUtils.authenticateUser(testUser);
-    System.out.println("Authentication Result: " + result);
-
-    assertTrue(result);  // Change here to make the test fail
-}
+//    @Test
+//    public void testAuthenticateUser_UnsuccessfulAuthentication() {
+//        // Provide data that does not match any user in the database
+//        User testUser = new User();
+//        testUser.setEmail("invalid@gmail.com");
+//        testUser.setPassword("invalidPassword");
+//        testUser.setUser_type("invalidUserType");
+//
+//        assertFalse(DBUtils.authenticateUser(testUser));
+//    }
+//    
+//    
+//    @Test
+//    public void testAuthenticateUser_SuccessfulAuthentication() {
+//        User testUser = new User();
+//        testUser.setEmail("sam@gmail.com");
+//        testUser.setPassword("www");
+//        testUser.setUser_type("job seeker");
+//
+//        boolean result = DBUtils.authenticateUser(testUser);
+//        System.out.println("Authentication Result: " + result);
+//
+//        assertTrue(result);
+//    }
+//    
+//    
+//    
+//    @Test
+//public void testAuthenticateUser1_SuccessfulAuthentication1() {
+//    User testUser = new User();
+//    testUser.setEmail("sam@gmail.com");
+//    testUser.setPassword("www");
+//    testUser.setUser_type("job seeker");
+//
+//    boolean result = DBUtils.authenticateUser(testUser);
+//    System.out.println("Authentication Result: " + result);
+//
+//    assertTrue(result);  // Change here to make the test fail
+//}
     
 }

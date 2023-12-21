@@ -155,12 +155,49 @@ public class UserResource {
 //
 
     
+//    
+//    @POST
+//    @Path("authenticate")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public Response authenticateUser(User user) {
+//        if (DBUtils.authenticateUser(user)) {
+//        // Authentication successful
+//        String userType = user.getUser_type();
+//        String redirectUrl;
+//
+//        if ("Administrator".equals(userType)) {
+//            redirectUrl = "admin_dashboard.html";
+//        } else if ("Consultant".equals(userType)) {
+//            redirectUrl = "consultant_dashboard.html";
+//        } else if ("Job Seeker".equals(userType)) {
+//            redirectUrl = "./Software Engineering/job_seeker_dashboard.html";
+//        } else {
+//            // Handle unknown user types here
+//            return Response.status(Response.Status.UNAUTHORIZED)
+//                    .entity("Unknown user type")
+//                    .build();
+//        }
+//
+//        // Return a JSON response with the redirect URL
+//        return Response.status(Response.Status.OK)
+//                .entity("{\"redirect\":\"" + redirectUrl + "\"}")
+//                .build();
+//    } else {
+//        // Authentication failed
+//        return Response.status(Response.Status.UNAUTHORIZED)
+//                .entity("Login failed by api")
+//                .build();
+//    }
+//    }
+    
+    
+    
     
     @POST
-    @Path("authenticate")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response authenticateUser(User user) {
-        if (DBUtils.authenticateUser(user)) {
+@Path("authenticate")
+@Consumes(MediaType.APPLICATION_JSON)
+public Response authenticateUser(User user) {
+    if (DBUtils.authenticateUser(user)) {
         // Authentication successful
         String userType = user.getUser_type();
         String redirectUrl;
@@ -170,7 +207,45 @@ public class UserResource {
         } else if ("Consultant".equals(userType)) {
             redirectUrl = "consultant_dashboard.html";
         } else if ("Job Seeker".equals(userType)) {
-            redirectUrl = "job_seeker_dashboard.html";
+            redirectUrl = "./Software Engineering/job_seeker_dashboard.html";
+        } else {
+            // Handle unknown user types here
+            return Response.status(Response.Status.UNAUTHORIZED)
+                    .entity("Unknown user type")
+                    .build();
+        }
+
+        // Return a JSON response with the redirect URL and success message
+        return Response.status(Response.Status.OK)
+                .entity("{\"status\":\"success\",\"message\":\"Logged in successfully\",\"redirect\":\"" + redirectUrl + "\"}")
+                .build();
+    } else {
+        // Authentication failed
+        return Response.status(Response.Status.UNAUTHORIZED)
+                .entity("{\"status\":\"fail\",\"message\":\"Failed to login\"}")
+                .build();
+    }
+}
+    
+    
+    
+    
+    
+    @POST
+    @Path("authenticate_cyber_user")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response authenticateCyberUser(User_Cyber_Security cyber_user) {
+        if (DBUtils.authenticateCyberUser(cyber_user)) {
+        // Authentication successful
+        String userType = cyber_user.getCuser_type();
+        String redirectUrl;
+
+        if ("Administrator".equals(userType)) {
+            redirectUrl = "admin_dashboard.html";
+        } else if ("Consultant".equals(userType)) {
+            redirectUrl = "Cyber_consultant_dashboard.html";
+        } else if ("Job Seeker".equals(userType)) {
+            redirectUrl = "Cyber_job_seeker.html";
         } else {
             // Handle unknown user types here
             return Response.status(Response.Status.UNAUTHORIZED)
