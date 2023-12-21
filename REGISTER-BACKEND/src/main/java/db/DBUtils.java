@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import Classes.User;
 import Classes.User_Cyber_Security;
+import Classes.Consultants;
 import java.sql.PreparedStatement;
 
 /**
@@ -340,4 +341,34 @@ public static boolean authenticateCyberUser(User_Cyber_Security cyber_user) {
 //        }     
 //        return false;
 //    }
-}    
+    
+    
+    
+    
+    
+    public boolean addConsultant(Consultants consultant) {
+        try {
+            // Create a database connection
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            // Prepare the SQL statement
+            String sql = "INSERT INTO `appointments`.`ConsultantSE` (`date`, `time`, `name`) VALUES (?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, consultant.getDate());
+            pstmt.setString(2, consultant.getTime());
+            pstmt.setString(3, consultant.getName());
+
+            // Execute the insert statement
+            int rowsInserted = pstmt.executeUpdate();
+
+            // Close the connection
+            conn.close();
+
+            // Check if the insert was successful
+            return rowsInserted > 0;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+}  

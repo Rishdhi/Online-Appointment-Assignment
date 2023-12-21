@@ -431,6 +431,49 @@ function login() {
 
 
 
+function addConsultant() {
+    const date = document.getElementById("date").value;
+    const time = document.getElementById("time").value;
+    const name = document.getElementById("jobSeeker").value;
+
+    // Create a consultant object to send to the server
+    const consultant = {
+        date: date,
+        time: time,
+        name: name
+    };
+    
+    console.log("Consultant Object:", consultant);
+
+    // Make an API request to add the consultant
+    fetch("http://localhost:8080/REGISTER-BACKEND/resources/student/addConsultant", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(consultant),
+    })
+    .then((response) => {
+        if (response.status === 201) {
+            alert("Consultant Added Successfully!");
+            // Consultant added successfully, handle any further actions
+        } else {
+            alert("Failed to Add Consultant!");
+            // Failed to add consultant, display an error message
+        }
+    })
+    .catch((error) => {
+        // Handle errors and display an error message
+        console.error(error);
+    });
+}
+
+
+
+
+
+
+
 
 
 

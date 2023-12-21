@@ -4,6 +4,7 @@
  */
 package service;
 
+import Classes.Consultants;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -310,6 +311,35 @@ public Response authenticateUser(User user) {
         }
     }
 
+    
+    
+    
+    @POST
+    @Path("/addConsultant")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addConsultant(String json) {
+        Gson gson = new GsonBuilder().create();
+        Consultants consultant = gson.fromJson(json, Consultants.class);
+
+        DBUtils utils = new DBUtils();
+        boolean result;
+        result = utils.addConsultant(consultant);
+        if (result) {
+            String successMessage = "You successfully saved your date and time";
+            return Response.status(Response.Status.CREATED)
+                    .entity(successMessage)
+                    .build();
+        } else {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .build();
+        }
+    }
+    
+    
+    
+    
+    
+    
 
 
 // @POST
