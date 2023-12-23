@@ -125,27 +125,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 		<input type="submit" value="Schedule" class="button">
 	</form>
 	
-	<h2>Upcoming Appointments</h2>
-	<table class="appointments">
-		<tr>
-			<th>Date</th>
-			<th>Time</th>
-			<th>Job Seeker</th>
-			<th>Status</th>
-		</tr>
-		<tr>
-			<td>2022-01-15</td>
-			<td>02:00 PM</td>
-			<td>Robert Johnson</td>
-			<td>Upcoming</td>
-		</tr>
-		<tr>
-			<td>2022-01-18</td>
-			<td>10:30 AM</td>
-			<td>Amy Wilson</td>
-			<td>Upcoming</td>
-		</tr>
-	</table>
+<h2>Available Consultants</h2>
+<table class="appointments" id="consultantsTable">
+    <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Consultant Name</th>
+        <th>Status</th>
+    </tr>
+</table>
+
 </div>
                   
                      
@@ -221,6 +210,58 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             alert('Appointment booked successfully!');
 
         }
+        
+        function viewConsultants() {
+    // Make an API request to retrieve all consultants
+    fetch("http://localhost:8080/REGISTER-BACKEND/resources/student/viewConsultants", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+    .then((response) => {
+        if (response.status === 200) {
+            return response.json();
+        } else {
+            throw new Error("Failed to fetch consultants");
+        }
+    })
+    .then((consultants) => {
+        // Display the consultants in the HTML table
+        displayConsultants(consultants);
+    })
+    .catch((error) => {
+        // Handle errors and display an error message
+        console.error(error);
+    });
+}
+
+function displayConsultants(consultants) {
+    const table = document.getElementById("consultantsTable");
+
+    // Clear existing rows
+    while (table.rows.length > 1) {
+        table.deleteRow(1);
+    }
+
+    // Populate the table with fetched consultants
+    consultants.forEach((consultant, index) => {
+        const row = table.insertRow(index + 1);
+        const dateCell = row.insertCell(0);
+        const timeCell = row.insertCell(1);
+        const nameCell = row.insertCell(2);
+        const statusCell = row.insertCell(3);
+
+        dateCell.textContent = consultant.date;
+        timeCell.textContent = consultant.time;
+        nameCell.textContent = consultant.name;
+        statusCell.textContent = "Upcoming"; // You may need to modify this based on the actual status data
+    });
+}
+
+// Call the viewConsultants function when the page loads
+window.onload = viewConsultants;
+
     </script>
                      
                      

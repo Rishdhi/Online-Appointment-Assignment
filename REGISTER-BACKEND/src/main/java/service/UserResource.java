@@ -208,7 +208,7 @@ public Response authenticateUser(User user) {
         } else if ("Consultant".equals(userType)) {
             redirectUrl = "consultant_dashboard.html";
         } else if ("Job Seeker".equals(userType)) {
-            redirectUrl = "./Software Engineering/job_seeker_dashboard.html";
+            redirectUrl = "job_seeker_dashboard.html";
         } else {
             // Handle unknown user types here
             return Response.status(Response.Status.UNAUTHORIZED)
@@ -335,6 +335,22 @@ public Response authenticateUser(User user) {
         }
     }
     
+    
+    
+    
+    @GET
+    @Path("/viewConsultants")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response viewConsultants() {
+        DBUtils dbUtils = new DBUtils();
+        List<Consultants> consultantsList = dbUtils.getAllConsultants();
+
+        if (consultantsList != null && !consultantsList.isEmpty()) {
+            return Response.status(Response.Status.OK).entity(consultantsList).build();
+        } else {
+            return Response.status(Response.Status.NO_CONTENT).entity("No consultants found").build();
+        }
+    }
     
     
     

@@ -371,4 +371,42 @@ public static boolean authenticateCyberUser(User_Cyber_Security cyber_user) {
         }
         return false;
     }
+    
+    
+    
+    
+    
+    
+    
+    public List<Consultants> getAllConsultants() {
+        List<Consultants> consultantsList = new ArrayList<>();
+
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            String sql = "SELECT * FROM `appointments`.`ConsultantSE`";
+            try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+                while (rs.next()) {
+                    Consultants consultant = new Consultants();
+                    consultant.setDate(rs.getString("date"));
+                    consultant.setTime(rs.getString("time"));
+                    consultant.setName(rs.getString("name"));
+                    consultantsList.add(consultant);
+                }
+            }
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return consultantsList;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }  
