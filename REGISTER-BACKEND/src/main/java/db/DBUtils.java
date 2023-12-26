@@ -402,11 +402,5 @@ public static boolean authenticateCyberUser(User_Cyber_Security cyber_user) {
     }
     
     
-    
-    
-    
-    
-    
-    
-    
+   
 }  
