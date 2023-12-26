@@ -355,6 +355,23 @@ public Response authenticateUser(User user) {
     
     
     
+    @GET
+    @Path("/con_names")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getConsultantNames() {
+        List<String> consultantNames = DBUtils.getConsultantNames();
+
+        if (consultantNames != null && !consultantNames.isEmpty()) {
+            // Return success with the list of names
+            return Response.ok(consultantNames).build();
+        } else {
+            // Return failure with an error message
+            return Response.status(Response.Status.NOT_FOUND).entity("No consultant names found.").build();
+        }
+    }
+    
+    
+    
     
 
 

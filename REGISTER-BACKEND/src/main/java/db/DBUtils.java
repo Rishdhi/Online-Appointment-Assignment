@@ -402,5 +402,28 @@ public static boolean authenticateCyberUser(User_Cyber_Security cyber_user) {
     }
     
     
+    
+    
+    
+    public static List<String> getConsultantNames() {
+        List<String> consultantNames = new ArrayList<>();
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);) {
+            String query = "SELECT name FROM `appointments`.`ConsultantSE`";
+            try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        consultantNames.add(resultSet.getString("name"));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return consultantNames;
+    }
+    
+    
    
 }  

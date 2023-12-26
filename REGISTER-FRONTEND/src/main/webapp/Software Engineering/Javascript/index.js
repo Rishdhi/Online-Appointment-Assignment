@@ -477,14 +477,6 @@ function addConsultant() {
 
 
 
-
-
-
-
-
-
-
-
 //
 //const updurl = "http://localhost:8080/API-DATA-TESTING-BACKEND/resources/student/updateStudent";
 //

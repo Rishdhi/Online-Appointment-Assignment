@@ -163,12 +163,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
             <label for="consultant">Select Consultant:</label>
             <select id="consultant" name="consultant">
-                <option value="consultant1">Consultant 1</option>
-                <option value="consultant2">Consultant 2</option>
-                <option value="consultant3">Consultant 3</option>
-                <option value="consultant4">Consultant 4</option>
-                <option value="consultant5">Consultant 5</option>
+
             </select><br>
+            
+
+
 
 <!--            <button type="button" onclick="submitForm()">Book Appointment</button>-->
             <button type="button">Book Appointment</button>
@@ -245,6 +244,28 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
     // Call the viewConsultants function when the page loads
             window.onload = viewConsultants;
+            
+            
+            
+            
+            
+document.addEventListener("DOMContentLoaded", function () {
+    // Fetch consultant names from the API endpoint
+    fetch("http://localhost:8080/REGISTER-BACKEND/resources/student/con_names")
+        .then(response => response.json())
+        .then(consultantNames => {
+            // Populate the dropdown with fetched consultant names
+            const consultantDropdown = document.getElementById("consultant");
+
+            consultantNames.forEach(name => {
+                const option = document.createElement("option");
+                option.value = name;
+                option.textContent = name;
+                consultantDropdown.appendChild(option);
+            });
+        })
+        .catch(error => console.error("Error fetching consultant names:", error));
+});
             
 
         </script>
