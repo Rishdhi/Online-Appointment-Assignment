@@ -4,6 +4,7 @@
  */
 package db;
 
+import Classes.AppointmentData;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -422,6 +423,32 @@ public static boolean authenticateCyberUser(User_Cyber_Security cyber_user) {
         }
 
         return consultantNames;
+    }
+    
+    
+    
+
+ public static boolean addAppointment(AppointmentData appointmentData) {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            String sql = "INSERT INTO `appointments`.`appointmentdata` (`full_name`, `email`, `phone`, `consultant`, `status`) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, appointmentData.getFullName());
+            pstmt.setString(2, appointmentData.getEmail());
+            pstmt.setString(3, appointmentData.getPhone());
+            pstmt.setString(4, appointmentData.getConsultant());
+            pstmt.setString(5, appointmentData.getStatus());
+
+            int rowsInserted = pstmt.executeUpdate();
+
+            conn.close();
+
+            return rowsInserted > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
     
     

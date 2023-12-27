@@ -151,27 +151,32 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
   
 
 
-        <form id="jobSeekerForm">
-            <label for="fullName">Full Name:</label>
-            <input type="text" id="fullName" name="fullName" required><br>
+<form id="jobSeekerForm">
+    <label for="fullName">Full Name:</label>
+    <input type="text" id="fullName" name="fullName" required><br>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br>
 
-            <label for="phone">Phone:</label>
-            <input type="tel" id="phone" name="phone" required><br>
+    <label for="phone">Phone:</label>
+    <input type="tel" id="phone" name="phone" required><br>
 
-            <label for="consultant">Select Consultant:</label>
-            <select id="consultant" name="consultant">
+    <label for="consultant">Select Consultant:</label>
+    <select id="consultant" name="consultant"></select><br>
 
-            </select><br>
-            
+    <label for="status">Status:</label>
+    <select id="status" name="status" disabled>
+        <option value="pending">Pending</option>
+        <option value="accepted">Accepted</option>
+        <option value="rejected">Rejected</option>
+        <option value="Completed">Rejected</option>
+    </select><br>
 
+<!--    <button type="button" id="bookAppointmentBtn">Book Appointment</button>-->
+    <button type="button" id="bookAppointmentBtn" onclick="bookAppointment()">Book Appointment</button>
 
+</form>
 
-<!--            <button type="button" onclick="submitForm()">Book Appointment</button>-->
-            <button type="button">Book Appointment</button>
-        </form>
 
         <script>
             function submitForm() {
@@ -266,6 +271,43 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(error => console.error("Error fetching consultant names:", error));
 });
+
+
+
+function bookAppointment() {
+        // Get form values
+        const fullName = document.getElementById('fullName').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const selectedConsultant = document.getElementById('consultant').value;
+        const selectedStatus = document.getElementById('status').value;
+
+        // Create appointment data object
+        const appointmentData = {
+            fullName: fullName,
+            email: email,
+            phone: phone,
+            consultant: selectedConsultant,
+            status: selectedStatus
+        };
+
+        // Make API call to add appointment
+        fetch("http://localhost:8080/REGISTER-BACKEND/resources/student/book", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(appointmentData),
+        })
+            .then(response => {
+                if (response.status === 201) {
+                    alert('Appointment booked successfully!');
+                } else {
+                    alert('Failed to book appointment. Please try again.');
+                }
+            })
+            .catch(error => console.error("Error booking appointment:", error));
+    }
             
 
         </script>

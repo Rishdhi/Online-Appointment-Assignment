@@ -12,42 +12,53 @@ package Classes;
 import java.util.Date;
 
 public class AppointmentData {
-    private int jobSeekerId;
-    private int consultantId;
-    private Date appointmentTime;
 
-    // Constructor
-
-    public AppointmentData(int jobSeekerId, int consultantId, Date appointmentTime) {
-        this.jobSeekerId = jobSeekerId;
-        this.consultantId = consultantId;
-        this.appointmentTime = appointmentTime;
+    public String getFullName() {
+        return fullName;
     }
 
-    // Getters and Setters
-
-    public int getJobSeekerId() {
-        return jobSeekerId;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public void setJobSeekerId(int jobSeekerId) {
-        this.jobSeekerId = jobSeekerId;
+    public String getEmail() {
+        return email;
     }
 
-    public int getConsultantId() {
-        return consultantId;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setConsultantId(int consultantId) {
-        this.consultantId = consultantId;
+    public String getPhone() {
+        return phone;
     }
 
-    public Date getAppointmentTime() {
-        return appointmentTime;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public void setAppointmentTime(Date appointmentTime) {
-        this.appointmentTime = appointmentTime;
+    public String getConsultant() {
+        return consultant;
     }
+
+    public void setConsultant(String consultant) {
+        this.consultant = consultant;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
+    
+    private String fullName;
+    private String email;
+    private String phone;
+    private String consultant;
+    private String status;
+    
 }
 

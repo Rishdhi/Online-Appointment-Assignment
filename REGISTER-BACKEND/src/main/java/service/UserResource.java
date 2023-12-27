@@ -4,6 +4,7 @@
  */
 package service;
 
+import Classes.AppointmentData;
 import Classes.Consultants;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -370,6 +371,19 @@ public Response authenticateUser(User user) {
         }
     }
     
+    
+    
+     @POST
+    @Path("/book")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addAppointment(AppointmentData appointmentData) {
+        if (DBUtils.addAppointment(appointmentData)) {
+            return Response.status(Response.Status.CREATED).build();
+        } else {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+    }
     
     
     
