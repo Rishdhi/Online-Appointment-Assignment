@@ -5,9 +5,134 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 -->
 <html>
     <head>
-        <title>Consultant Page</title> 
-        <link rel="stylesheet" href="./CSS/consult.css">
-    </head> 
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--        <link rel="stylesheet" href="./dashboard.css">-->
+        <style> 
+            
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f2f2f2;
+            }
+            .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease-in-out;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 12.5rem; /* Adjust the width as needed */
+    height: auto;
+    margin-right: 20px;
+}
+
+nav a:hover {
+    color: #e74c3c;
+}
+            h1 {
+                color: #333;
+            }
+            .container {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 40px;
+                background-color: #fff;
+                margin-bottom: 40px;
+            }
+            .button {
+                padding: 10px 20px;
+                background-color: #333;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            .appointments {
+                margin-top: 20px;
+                border-collapse: collapse;
+                width: 100%;
+            }
+            .appointments th, .appointments td {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+                text-align: left;
+            }
+            .appointments th {
+                background-color: #333;
+                color: #fff;
+                margin-bottom: 40px;
+            }
+            
+
+#jobSeekerForm {
+    max-width: 400px; /* Set a maximum width for the form */
+    margin: 0 auto; /* Center the form horizontally */
+    padding: 20px; /* Add padding for spacing */
+    background-color: #fff; /* Set a background color for the form */
+    border-radius: 8px; /* Add rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
+#jobSeekerForm label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+#jobSeekerForm input,
+#jobSeekerForm select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+#jobSeekerForm button {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+        </style>
+    </head>
     <body> 
         <header>
             <div class="logo">
@@ -51,6 +176,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     </td>
                 </tr>
             </table>
+            
+            
+        <div class="container">
+        <h1>Consultant Page</h1>
+        <h2>Appointment Requests</h2>
+        <table class="appointments" id="appointmentsTable">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Consultant</th>
+                <th>Status</th>
+                <th>Actions</th> <!-- New column for Edit buttons -->
+            </tr>
+        </table>
+    </div>
 
             <h2>Schedule New Appointment</h2>
             <form>

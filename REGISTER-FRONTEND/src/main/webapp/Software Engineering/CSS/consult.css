@@ -74,6 +74,15 @@ nav a:hover {
     padding: 100px 0;
 }
 
+.button {
+    padding: 10px 20px;
+                background-color: #333;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
 .containerlog {
     height: 100vh;
     width: 100%;

@@ -3,34 +3,34 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
 
-
-const forms = document.querySelector(".forms"),
-      pwShowHide = document.querySelectorAll(".eye-icon"),
-      links = document.querySelectorAll(".link");
-
-pwShowHide.forEach(eyeIcon => {
-    eyeIcon.addEventListener("click", () => {
-        let pwFields = eyeIcon.parentElement.parentElement.querySelectorAll(".password");
-        
-        pwFields.forEach(password => {
-            if(password.type === "password"){
-                password.type = "text";
-                eyeIcon.classList.replace("bx-hide", "bx-show");
-                return;
-            }
-            password.type = "password";
-            eyeIcon.classList.replace("bx-show", "bx-hide");
-        })
-        
-    })
-})      
-
-links.forEach(link => {
-    link.addEventListener("click", e => {
-       e.preventDefault(); //preventing form submit
-       forms.classList.toggle("show-signup");
-    })
-})
+//
+//const forms = document.querySelector(".forms"),
+//      pwShowHide = document.querySelectorAll(".eye-icon"),
+//      links = document.querySelectorAll(".link");
+//
+//pwShowHide.forEach(eyeIcon => {
+//    eyeIcon.addEventListener("click", () => {
+//        let pwFields = eyeIcon.parentElement.parentElement.querySelectorAll(".password");
+//        
+//        pwFields.forEach(password => {
+//            if(password.type === "password"){
+//                password.type = "text";
+//                eyeIcon.classList.replace("bx-hide", "bx-show");
+//                return;
+//            }
+//            password.type = "password";
+//            eyeIcon.classList.replace("bx-show", "bx-hide");
+//        })
+//        
+//    })
+//})      
+//
+//links.forEach(link => {
+//    link.addEventListener("click", e => {
+//       e.preventDefault(); //preventing form submit
+//       forms.classList.toggle("show-signup");
+//    })
+//})
 
 
 
@@ -211,89 +211,89 @@ links.forEach(link => {
 
 
 //const url = "http://localhost:8080/API-DATA-TESTING-BACKEND/resources/student/addUser";
+//
+//const addurl = "http://localhost:8080/REGISTER-BACKEND/resources/student/addUser";
+//
+//function addUser() {
+//    const person = {
+//        "username": document.getElementById("name").value,
+//        "contact_number": document.getElementById("txtNum").value,
+//        "email": document.getElementById("txtMail").value,
+//        "password": document.getElementById("txtPass").value,
+//        "user_type": document.getElementById("signupUserType").value
+//    };
+//
+//    const options = {
+//        method: "POST",
+//        headers: {
+//            "content-type": "application/json"
+//        },
+//        body: JSON.stringify(person)
+//    };
+//
+//    fetch(addurl, options)
+//        .then(response => {
+//            if (response.status === 201) {
+//                // Display a success message in the apiResponse div
+//                alert("User successfully added!");
+////                apiResponse.innerHTML = "Student successfully added!";
+//                return response.json();
+//            } else {
+//                // Handle other status codes here
+//                alert("Error adding User.!");
+////                apiResponse.innerHTML = "Error adding User.";
+//                throw new Error("Error: " + response.status);
+//            }
+//        })
+//        .then(data => {
+//            // Process and display the API response as needed
+//            // You can update apiResponse with the data if necessary
+//        })
+//        .catch(error => {
+//            console.error(error);
+//        });
+//}
 
-const addurl = "http://localhost:8080/REGISTER-BACKEND/resources/student/addUser";
-
-function addUser() {
-    const person = {
-        "username": document.getElementById("name").value,
-        "contact_number": document.getElementById("txtNum").value,
-        "email": document.getElementById("txtMail").value,
-        "password": document.getElementById("txtPass").value,
-        "user_type": document.getElementById("signupUserType").value
-    };
-
-    const options = {
-        method: "POST",
-        headers: {
-            "content-type": "application/json"
-        },
-        body: JSON.stringify(person)
-    };
-
-    fetch(addurl, options)
-        .then(response => {
-            if (response.status === 201) {
-                // Display a success message in the apiResponse div
-                alert("User successfully added!");
-//                apiResponse.innerHTML = "Student successfully added!";
-                return response.json();
-            } else {
-                // Handle other status codes here
-                alert("Error adding User.!");
-//                apiResponse.innerHTML = "Error adding User.";
-                throw new Error("Error: " + response.status);
-            }
-        })
-        .then(data => {
-            // Process and display the API response as needed
-            // You can update apiResponse with the data if necessary
-        })
-        .catch(error => {
-            console.error(error);
-        });
-}
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Your JavaScript code for adding a user here
-
-    const addurl = "http://localhost:8080/REGISTER-BACKEND/resources/student/addUser";
-
-    function addUser() {
-        const person = {
-            "username": document.getElementById("name").value,
-            "contact_number": document.getElementById("txtNum").value,
-            "email": document.getElementById("txtMail").value,
-            "password": document.getElementById("txtPass").value,
-            "user_type": document.getElementById("signupUserType").value
-        };
-
-        const options = {
-            method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(person)
-        };
-
-        fetch(addurl, options)
-            .then(response => {
-                if (response.status === 201) {
-                    // Display a success message
-                    alert("User successfully added!");
-                } else {
-                    // Handle other status codes here
-                    alert("Error adding User!");
-                    throw new Error("Error: " + response.status);
-                }
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }
-});
+//
+//
+//document.addEventListener("DOMContentLoaded", function () {
+//    // Your JavaScript code for adding a user here
+//
+//    const addurl = "http://localhost:8080/REGISTER-BACKEND/resources/student/addUser";
+//
+//    function addUser() {
+//        const person = {
+//            "username": document.getElementById("name").value,
+//            "contact_number": document.getElementById("txtNum").value,
+//            "email": document.getElementById("txtMail").value,
+//            "password": document.getElementById("txtPass").value,
+//            "user_type": document.getElementById("signupUserType").value
+//        };
+//
+//        const options = {
+//            method: "POST",
+//            headers: {
+//                "content-type": "application/json"
+//            },
+//            body: JSON.stringify(person)
+//        };
+//
+//        fetch(addurl, options)
+//            .then(response => {
+//                if (response.status === 201) {
+//                    // Display a success message
+//                    alert("User successfully added!");
+//                } else {
+//                    // Handle other status codes here
+//                    alert("Error adding User!");
+//                    throw new Error("Error: " + response.status);
+//                }
+//            })
+//            .catch(error => {
+//                console.error(error);
+//            });
+//    }
+//});
 
 
 
@@ -383,47 +383,47 @@ document.addEventListener("DOMContentLoaded", function () {
 //    });
 //}
 
-
-
-
-function login() {
-    const email = document.getElementById("log-email").value;
-    const password = document.getElementById("log-password").value;
-    const userType = document.getElementById("log-loginUserType").value;
-
-    // Create a user object to send to the server
-    const user = {
-        email: email,
-        password: password,
-        user_type: userType
-    };
-
-    // Make an API request to authenticate the user
-    fetch("http://localhost:8080/REGISTER-BACKEND/resources/student/authenticate", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        if (data.status === "success") {
-            // Authentication was successful, display the success message
-            alert(data.message);
-            // Handle the redirection here
-            window.location.href = data.redirect;
-        } else {
-            // Authentication failed, display the error message
-            alert(data.message);
-            throw new Error(data.message);
-        }
-    })
-    .catch((error) => {
-        // Handle errors and display an error message
-        console.error(error);
-    });
-}
+//
+//
+//
+//function login() {
+//    const email = document.getElementById("log-email").value;
+//    const password = document.getElementById("log-password").value;
+//    const userType = document.getElementById("log-loginUserType").value;
+//
+//    // Create a user object to send to the server
+//    const user = {
+//        email: email,
+//        password: password,
+//        user_type: userType
+//    };
+//
+//    // Make an API request to authenticate the user
+//    fetch("http://localhost:8080/REGISTER-BACKEND/resources/student/authenticate", {
+//        method: "POST",
+//        headers: {
+//            "Content-Type": "application/json",
+//        },
+//        body: JSON.stringify(user),
+//    })
+//    .then((response) => response.json())
+//    .then((data) => {
+//        if (data.status === "success") {
+//            // Authentication was successful, display the success message
+//            alert(data.message);
+//            // Handle the redirection here
+//            window.location.href = data.redirect;
+//        } else {
+//            // Authentication failed, display the error message
+//            alert(data.message);
+//            throw new Error(data.message);
+//        }
+//    })
+//    .catch((error) => {
+//        // Handle errors and display an error message
+//        console.error(error);
+//    });
+//}
 
 
 
@@ -556,6 +556,95 @@ function addConsultant() {
 //
 //
 //
+
+
+
+
+// Updated JavaScript
+//document.addEventListener('DOMContentLoaded', function () {
+//    fetchAppointments();
+//});
+//
+//function fetchAppointments() {
+//    fetch('http://localhost:8080/REGISTER-BACKEND/resources/student/fetch_appointment')
+//        .then(response => response.json())
+//        .then(appointments => {
+//            const appointmentsTable = document.getElementById('appointmentsTable');
+//            appointmentsTable.innerHTML = "<tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Consultant</th><th>Status</th><th>Actions</th></tr>";
+//
+//            appointments.forEach(appointment => {
+//                appointmentsTable.innerHTML += `
+//                    <tr>
+//                        <td>${appointment.id}</td>
+//                        <td>${appointment.fullName}</td>
+//                        <td>${appointment.email}</td>
+//                        <td>${appointment.phone}</td>
+//                        <td>${appointment.consultant}</td>
+//                        <td>${appointment.status}</td>
+//                        <td>
+//                            <button class="button" onclick="editAppointment(${appointment.id})">Edit</button>
+//                        </td>
+//                    </tr>
+//                `;
+//            });
+//        });
+//}
+//
+//function editAppointment(appointmentId) {
+//    // Implement edit logic, e.g., redirect to an edit page or show a modal
+//    console.log(`Edit appointment with ID ${appointmentId}`);
+//    // You can customize this function based on your application's requirements
+//}
+
+
+
+
+
+
+
+
+
+function fetchAppointments() {
+    fetch('http://localhost:8080/REGISTER-BACKEND/resources/student/fetch_appointment')
+        .then(response => response.json())
+        .then(appointments => {
+            console.log(appointments); // Log the fetched data
+
+            const appointmentsTable = document.getElementById('appointmentsTable');
+
+            appointments.forEach(appointment => {
+                const row = appointmentsTable.insertRow(-1); // -1 inserts at the end
+
+                const idCell = row.insertCell(0);
+                const fullNameCell = row.insertCell(1);
+                const emailCell = row.insertCell(2);
+                const phoneCell = row.insertCell(3);
+                const consultantCell = row.insertCell(4);
+                const statusCell = row.insertCell(5);
+                const actionsCell = row.insertCell(6);
+
+                idCell.textContent = appointment.id;
+                fullNameCell.textContent = appointment.fullName;
+                emailCell.textContent = appointment.email;
+                phoneCell.textContent = appointment.phone;
+                consultantCell.textContent = appointment.consultant;
+                statusCell.textContent = appointment.status;
+
+                const editButton = document.createElement("button");
+                editButton.className = "button";
+                editButton.textContent = "Edit";
+                editButton.onclick = () => editAppointment(appointment.id);
+                actionsCell.appendChild(editButton);
+            });
+        })
+        .catch(error => {
+            console.error(error);
+            alert(`Error fetching appointments: ${error.message}`);
+        });
+}
+
+// Call the fetchAppointments function when the page loads
+window.onload = fetchAppointments;
 
 
 

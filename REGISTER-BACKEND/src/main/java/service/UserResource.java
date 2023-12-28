@@ -371,6 +371,21 @@ public Response authenticateUser(User user) {
         }
     }
     
+    @GET
+    @Path("/fetch_appointment")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response fetchAppointments() {
+        
+            List<AppointmentData> appointments = DBUtils.fetchAppointments();
+                    if (appointments != null && !appointments.isEmpty()) {
+            // Return success with the list of names
+            return Response.ok(appointments).build();
+        } else {
+            // Return failure with an error message
+            return Response.status(Response.Status.NOT_FOUND).entity("No consultant names found.").build();
+        }
+    }
+    
     
     
      @POST
@@ -385,6 +400,8 @@ public Response authenticateUser(User user) {
         }
     }
     
+    
+
     
     
 

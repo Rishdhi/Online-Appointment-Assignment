@@ -52,8 +52,16 @@ public class AppointmentData {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
-    
+    private int id;
     private String fullName;
     private String email;
     private String phone;
