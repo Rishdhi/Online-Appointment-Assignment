@@ -603,6 +603,53 @@ function addConsultant() {
 
 
 
+//
+//function fetchAppointments() {
+//    fetch('http://localhost:8080/REGISTER-BACKEND/resources/student/fetch_appointment')
+//        .then(response => response.json())
+//        .then(appointments => {
+//            console.log(appointments); // Log the fetched data
+//
+//            const appointmentsTable = document.getElementById('appointmentsTable');
+//
+//            appointments.forEach(appointment => {
+//                const row = appointmentsTable.insertRow(-1); // -1 inserts at the end
+//
+//                const idCell = row.insertCell(0);
+//                const fullNameCell = row.insertCell(1);
+//                const emailCell = row.insertCell(2);
+//                const phoneCell = row.insertCell(3);
+//                const consultantCell = row.insertCell(4);
+//                const statusCell = row.insertCell(5);
+//                const actionsCell = row.insertCell(6);
+//
+//                idCell.textContent = appointment.id;
+//                fullNameCell.textContent = appointment.fullName;
+//                emailCell.textContent = appointment.email;
+//                phoneCell.textContent = appointment.phone;
+//                consultantCell.textContent = appointment.consultant;
+//                statusCell.textContent = appointment.status;
+//
+//                const editButton = document.createElement("button");
+//                editButton.className = "button";
+//                editButton.textContent = "Edit";
+//                editButton.onclick = () => editAppointment(appointment.id);
+//                actionsCell.appendChild(editButton);
+//            });
+//        })
+//        .catch(error => {
+//            console.error(error);
+//            alert(`Error fetching appointments: ${error.message}`);
+//        });
+//}
+//
+//// Call the fetchAppointments function when the page loads
+//window.onload = fetchAppointments;
+
+
+
+
+
 
 function fetchAppointments() {
     fetch('http://localhost:8080/REGISTER-BACKEND/resources/student/fetch_appointment')
@@ -624,17 +671,40 @@ function fetchAppointments() {
                 const actionsCell = row.insertCell(6);
 
                 idCell.textContent = appointment.id;
-                fullNameCell.textContent = appointment.fullName;
-                emailCell.textContent = appointment.email;
-                phoneCell.textContent = appointment.phone;
-                consultantCell.textContent = appointment.consultant;
-                statusCell.textContent = appointment.status;
+                fullNameCell.innerHTML = `<input type="text" value="${appointment.fullName}">`;
+                emailCell.innerHTML = `<input type="text" value="${appointment.email}">`;
+                phoneCell.innerHTML = `<input type="text" value="${appointment.phone}">`;
+                consultantCell.innerHTML = `<input type="text" value="${appointment.consultant}">`;
+
+                // Create a dropdown for the "Status" column
+                const statusDropdown = document.createElement("select");
+                statusDropdown.className = "status-dropdown";
+
+                // Define the possible status options
+                const statusOptions = ["Pending", "Confirmed", "Cancelled"];
+
+                // Populate the dropdown options
+                statusOptions.forEach(option => {
+                    const statusOption = document.createElement("option");
+                    statusOption.value = option;
+                    statusOption.textContent = option;
+                    statusDropdown.appendChild(statusOption);
+                });
+
+                // Set the initial selected status
+                statusDropdown.value = appointment.status;
+
+                // Append the dropdown to the status cell
+                statusCell.appendChild(statusDropdown);
 
                 const editButton = document.createElement("button");
                 editButton.className = "button";
                 editButton.textContent = "Edit";
-                editButton.onclick = () => editAppointment(appointment.id);
+                editButton.onclick = () => editAppointment(appointment.id, statusDropdown.value);
                 actionsCell.appendChild(editButton);
+
+                // Log the HTML of the entire row
+                console.log(row.outerHTML);
             });
         })
         .catch(error => {
@@ -645,9 +715,5 @@ function fetchAppointments() {
 
 // Call the fetchAppointments function when the page loads
 window.onload = fetchAppointments;
-
-
-
-
 
 
