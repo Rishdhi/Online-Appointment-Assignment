@@ -27,6 +27,8 @@ import db.DBUtils;
 import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.util.HashMap;
+import java.util.Map;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -371,20 +373,45 @@ public Response authenticateUser(User user) {
         }
     }
     
+//    @GET
+//    @Path("/fetch_appointment")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response fetchAppointments() {
+//        
+//            List<AppointmentData> appointments = DBUtils.fetchAppointments();
+//                    if (appointments != null && !appointments.isEmpty()) {
+//            // Return success with the list of names
+//            return Response.ok(appointments).build();
+//        } else {
+//            // Return failure with an error message
+//            return Response.status(Response.Status.NOT_FOUND).entity("No consultant names found.").build();
+//        }
+//    }
+    
+    
+    
+    
     @GET
-    @Path("/fetch_appointment")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response fetchAppointments() {
-        
-            List<AppointmentData> appointments = DBUtils.fetchAppointments();
-                    if (appointments != null && !appointments.isEmpty()) {
-            // Return success with the list of names
-            return Response.ok(appointments).build();
-        } else {
-            // Return failure with an error message
-            return Response.status(Response.Status.NOT_FOUND).entity("No consultant names found.").build();
-        }
+@Path("/fetch_appointment")
+@Produces(MediaType.APPLICATION_JSON)
+public Response fetchAppointmentsWithStatus() {
+    Map<String, Object> result = DBUtils.fetchAppointmentsWithStatus();
+
+    List<AppointmentData> appointments = (List<AppointmentData>) result.get("appointments");
+    List<String> statusOptions = (List<String>) result.get("statusOptions");
+
+    if (appointments != null && !appointments.isEmpty()) {
+        // Return success with the list of names and status options
+        Map<String, Object> response = new HashMap<>();
+        response.put("appointments", appointments);
+        response.put("statusOptions", statusOptions);
+        return Response.ok(response).build();
+    } else {
+        // Return failure with an error message
+        return Response.status(Response.Status.NOT_FOUND).entity("No appointments found.").build();
     }
+}
+    
     
     
     

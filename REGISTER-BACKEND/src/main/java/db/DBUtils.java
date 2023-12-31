@@ -16,6 +16,8 @@ import Classes.User;
 import Classes.User_Cyber_Security;
 import Classes.Consultants;
 import java.sql.PreparedStatement;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -452,34 +454,90 @@ public static boolean authenticateCyberUser(User_Cyber_Security cyber_user) {
     }
  
  
+// 
+//     public static List<AppointmentData> fetchAppointments() {
+//        List<AppointmentData> appointments = new ArrayList<>();
+//
+//  
+//        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASS)) {
+//            String query = "SELECT * FROM `appointments`.`appointmentdata`";
+//            try (PreparedStatement statement = con.prepareStatement(query)) {
+//                try (ResultSet resultSet = statement.executeQuery()) {
+//                    while (resultSet.next()) {
+//                        AppointmentData appointment = new AppointmentData();
+//                        appointment.setId(resultSet.getInt("id"));
+//                        appointment.setFullName(resultSet.getString("full_name"));
+//                        appointment.setEmail(resultSet.getString("email"));
+//                        appointment.setPhone(resultSet.getString("phone"));
+//                        appointment.setConsultant(resultSet.getString("consultant"));
+//                        appointment.setStatus(resultSet.getString("status"));
+//                        appointments.add(appointment);
+//                    }
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return appointments;
+//    }
+    
  
-     public static List<AppointmentData> fetchAppointments() {
-        List<AppointmentData> appointments = new ArrayList<>();
+ 
+ 
+ public static Map<String, Object> fetchAppointmentsWithStatus() {
+    Map<String, Object> result = new HashMap<>();
+    List<AppointmentData> appointments = new ArrayList<>();
 
-  
-        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASS)) {
-            String query = "SELECT * FROM `appointments`.`appointmentdata`";
-            try (PreparedStatement statement = con.prepareStatement(query)) {
-                try (ResultSet resultSet = statement.executeQuery()) {
-                    while (resultSet.next()) {
-                        AppointmentData appointment = new AppointmentData();
-                        appointment.setId(resultSet.getInt("id"));
-                        appointment.setFullName(resultSet.getString("full_name"));
-                        appointment.setEmail(resultSet.getString("email"));
-                        appointment.setPhone(resultSet.getString("phone"));
-                        appointment.setConsultant(resultSet.getString("consultant"));
-                        appointment.setStatus(resultSet.getString("status"));
-                        appointments.add(appointment);
-                    }
+    try (Connection con = DriverManager.getConnection(DB_URL, USER, PASS)) {
+        String query = "SELECT * FROM `appointments`.`appointmentdata`";
+        try (PreparedStatement statement = con.prepareStatement(query)) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    AppointmentData appointment = new AppointmentData();
+                    appointment.setId(resultSet.getInt("id"));
+                    appointment.setFullName(resultSet.getString("full_name"));
+                    appointment.setEmail(resultSet.getString("email"));
+                    appointment.setPhone(resultSet.getString("phone"));
+                    appointment.setConsultant(resultSet.getString("consultant"));
+                    appointment.setStatus(resultSet.getString("status"));
+                    appointments.add(appointment);
                 }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
 
-        return appointments;
+        // Add status values to the result map
+        result.put("appointments", appointments);
+        result.put("statusOptions", getStatusOptionsFromDatabase()); // You need to implement this method
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
-    
+
+    return result;
+}
+ 
+ 
+ 
+ private static List<String> getStatusOptionsFromDatabase() {
+    List<String> statusOptions = new ArrayList<>();
+
+    try (Connection con = DriverManager.getConnection(DB_URL, USER, PASS)) {
+        String query = "SELECT DISTINCT status FROM `appointments`.`appointmentdata`";
+        try (PreparedStatement statement = con.prepareStatement(query)) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    String status = resultSet.getString("status");
+                    statusOptions.add(status);
+                }
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return statusOptions;
+}
+
     
    
 }  

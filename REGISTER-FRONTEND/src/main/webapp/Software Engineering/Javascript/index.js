@@ -650,62 +650,475 @@ function addConsultant() {
 
 
 
+//
+//function fetchAppointments() {
+//    fetch('http://localhost:8080/REGISTER-BACKEND/resources/student/fetch_appointment')
+//        .then(response => response.json())
+//        .then(appointments => {
+//            console.log(appointments); // Log the fetched data
+//
+//            const appointmentsTable = document.getElementById('appointmentsTable');
+//
+//            appointments.forEach(appointment => {
+//                const row = appointmentsTable.insertRow(-1); // -1 inserts at the end
+//
+//                const idCell = row.insertCell(0);
+//                const fullNameCell = row.insertCell(1);
+//                const emailCell = row.insertCell(2);
+//                const phoneCell = row.insertCell(3);
+//                const consultantCell = row.insertCell(4);
+//                const statusCell = row.insertCell(5);
+//                const actionsCell = row.insertCell(6);
+//
+//                idCell.innerHTML = `<input type="text" value="${appointment.id}">`;
+//
+//// Disable other columns
+//                    fullNameCell.innerHTML = `<input type="text" value="${appointment.fullName}">`;
+//                    emailCell.innerHTML = `<input type="text" value="${appointment.email}">`;
+//                    phoneCell.innerHTML = `<input type="text" value="${appointment.phone}">`;
+//                    consultantCell.innerHTML = `<input type="text" value="${appointment.consultant}">`;
+//
+//
+//                // Create a dropdown for the "Status" column
+//                const statusDropdown = document.createElement("select");
+//                statusDropdown.className = "status-dropdown";
+//
+//                // Define the possible status options
+//                const statusOptions = ["Pending", "Confirmed", "Cancelled"];
+//
+//                // Populate the dropdown options
+//                statusOptions.forEach(option => {
+//                    const statusOption = document.createElement("option");
+//                    statusOption.value = option;
+//                    statusOption.textContent = option;
+//                    statusDropdown.appendChild(statusOption);
+//                });
+//
+//                // Set the initial selected status
+//                statusDropdown.value = appointment.status;
+//
+//                // Append the dropdown to the status cell
+//                statusCell.appendChild(statusDropdown);
+//
+//                const editButton = document.createElement("button");
+//                editButton.className = "button";
+//                editButton.textContent = "Edit";
+//                editButton.onclick = () => editAppointment(appointment.id, statusDropdown.value);
+//                actionsCell.appendChild(editButton);
+//
+//                // Log the HTML of the entire row
+//                console.log(row.outerHTML);
+//            });
+//        })
+//        .catch(error => {
+//            console.error(error);
+//            alert(`Error fetching appointments: ${error.message}`);
+//        });
+//}
+//
+//// Call the fetchAppointments function when the page loads
+//window.onload = fetchAppointments;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//function fetchAppointments() {
+//    fetch('http://localhost:8080/REGISTER-BACKEND/resources/student/fetch_appointment')
+//        .then(response => response.json())
+//        .then(appointments => {
+//            console.log(appointments); // Log the fetched data
+//
+//            const appointmentsTable = document.getElementById('appointmentsTable');
+//
+//            appointments.forEach(appointment => {
+//                const row = appointmentsTable.insertRow(-1); // -1 inserts at the end
+//
+//                const idCell = row.insertCell(0);
+//                const fullNameCell = row.insertCell(1);
+//                const emailCell = row.insertCell(2);
+//                const phoneCell = row.insertCell(3);
+//                const consultantCell = row.insertCell(4);
+//                const statusCell = row.insertCell(5);
+//                const actionsCell = row.insertCell(6);
+//                
+//                // Display the name in a span
+//                const fullNameSpan = document.createElement("span");
+//                fullNameSpan.textContent = appointment.fullName;
+//                fullNameSpan.className = "name-span";
+//                fullNameCell.appendChild(fullNameSpan);
+//
+//                idCell.textContent = appointment.id;
+//                emailCell.textContent = appointment.email;
+//                phoneCell.textContent = appointment.phone;
+//                consultantCell.textContent = appointment.consultant;
+//
+//                // Create and populate the status dropdown
+//                const statusDropdown = document.createElement("select");
+//                statusDropdown.className = "status-dropdown";
+//
+//                // Add options to the dropdown
+//                const statusOptions = ["Pending", "Accepted", "Rejected"];
+//                statusOptions.forEach(option => {
+//                    const optionElement = document.createElement("option");
+//                    optionElement.value = option;
+//                    optionElement.textContent = option;
+//                    statusDropdown.appendChild(optionElement);
+//                });
+//
+//                // Set the default selected value
+//                statusDropdown.value = appointment.status;
+//
+//                // Clear the statusCell and append the dropdown
+//                statusCell.innerHTML = "";
+//                statusCell.appendChild(statusDropdown);
+//
+//                // Create and append the edit button
+//                const editButton = document.createElement("button");
+//                editButton.className = "button";
+//                editButton.textContent = "Edit";
+//                editButton.onclick = () => editAppointment(appointment.id, statusDropdown.value);
+//                actionsCell.appendChild(editButton);
+//            });
+//        })
+//        .catch(error => {
+//            console.error(error);
+//            alert(`Error fetching appointments: ${error.message}`);
+//        });
+//}
+//
+//// Call the fetchAppointments function when the page loads
+//window.onload = fetchAppointments;
+//
+
+
+
+
+
+// Function to fetch appointments and populate the table
+//function fetchAppointments() {
+//    fetch('http://localhost:8080/REGISTER-BACKEND/resources/student/fetch_appointment')
+//        .then(response => response.json())
+//        .then(responseData => {
+//            const appointments = responseData.appointments;
+//            const statusOptions = responseData.statusOptions;
+//
+//            console.log(appointments); // Log the fetched data
+//
+//            const appointmentsTable = document.getElementById('appointmentsTable');
+//
+//            if (Array.isArray(appointments)) {
+//                appointments.forEach(appointment => {
+//                    const row = appointmentsTable.insertRow(-1);
+//
+//                    // Iterate over keys of each appointment
+//                    Object.keys(appointment).forEach(key => {
+//                        const cell = row.insertCell();
+//                        
+//                        if (key === 'fullName') {
+//                            // Display the name in a span
+//                            const fullNameSpan = document.createElement("span");
+//                            fullNameSpan.textContent = appointment[key];
+//                            fullNameSpan.className = "name-span";
+//                            cell.appendChild(fullNameSpan);
+//                        } else if (key === 'status') {
+//                            // Create and populate the status dropdown
+//                            const statusDropdown = document.createElement("select");
+//                            statusDropdown.className = "status-dropdown";
+//
+//                            // Add options to the dropdown
+//                            statusOptions.forEach(option => {
+//                                const optionElement = document.createElement("option");
+//                                optionElement.value = option;
+//                                optionElement.textContent = option;
+//
+//                                // Set the default selected value
+//                                if (option === appointment[key]) {
+//                                    optionElement.selected = true;
+//                                }
+//
+//                                statusDropdown.appendChild(optionElement);
+//                            });
+//
+//                            // Append the dropdown to the cell
+//                            cell.appendChild(statusDropdown);
+//                        } else {
+//                            // For other keys, just display the value
+//                            cell.textContent = appointment[key];
+//                        }
+//                    });
+//
+//                    // Create and append the edit button
+//                    const editButton = document.createElement("button");
+//                    editButton.className = "button";
+//                    editButton.textContent = "Edit";
+//                    editButton.onclick = () => editAppointment(appointment.id, row.cells[5].querySelector('.status-dropdown').value);
+//                    row.insertCell().appendChild(editButton);
+//
+//                    // Log the HTML of the entire row
+//                    console.log(row.outerHTML);
+//                });
+//            } else {
+//                console.error("Appointments data is not in the expected format.");
+//            }
+//        })
+//        .catch(error => {
+//            console.error(error);
+//            alert(`Error fetching appointments: ${error.message}`);
+//        });
+//}
+//
+//// Call the fetchAppointments function when the page loads
+//window.onload = fetchAppointments;
+
+
+
+
+
+//function fetchAppointments() {
+//    fetch('http://localhost:8080/REGISTER-BACKEND/resources/student/fetch_appointment')
+//        .then(response => response.json())
+//        .then(responseData => {
+//            const appointments = responseData.appointments;
+//            const statusOptions = responseData.statusOptions;
+//
+//            console.log(appointments); // Log the fetched data
+//
+//            const appointmentsTable = document.getElementById('appointmentsTable');
+//
+//            if (Array.isArray(appointments)) {
+//                appointments.forEach(appointment => {
+//                    const row = appointmentsTable.insertRow(-1);
+//
+//                    // Iterate over keys of each appointment in the desired order
+//                    const keysOrder = ['id', 'fullName', 'email', 'phone', 'consultant', 'status'];
+//                    keysOrder.forEach(key => {
+//                        const cell = row.insertCell();
+//                        
+//                        if (key === 'fullName') {
+//                            // Display the name in a span
+//                            const fullNameSpan = document.createElement("span");
+//                            fullNameSpan.textContent = appointment[key];
+//                            fullNameSpan.className = "name-span";
+//                            cell.appendChild(fullNameSpan);
+//                        } else if (key === 'status') {
+//                            // Create and populate the status dropdown
+//                            const statusDropdown = document.createElement("select");
+//                            statusDropdown.className = "status-dropdown";
+//
+//                            // Add options to the dropdown
+//                            statusOptions.forEach(option => {
+//                                const optionElement = document.createElement("option");
+//                                optionElement.value = option;
+//                                optionElement.textContent = option;
+//
+//                                // Set the default selected value
+//                                if (option === appointment[key]) {
+//                                    optionElement.selected = true;
+//                                }
+//
+//                                statusDropdown.appendChild(optionElement);
+//                            });
+//
+//                            // Append the dropdown to the cell
+//                            cell.appendChild(statusDropdown);
+//                        } else {
+//                            // For other keys, just display the value
+//                            cell.textContent = appointment[key];
+//                        }
+//                    });
+//
+//                    // Create and append the edit button
+//                    const editButton = document.createElement("button");
+//                    editButton.className = "button";
+//                    editButton.textContent = "Edit";
+//                    editButton.onclick = () => editAppointment(appointment.id, row.cells[5].querySelector('.status-dropdown').value);
+//                    row.insertCell().appendChild(editButton);
+//
+//                    // Log the HTML of the entire row
+//                    console.log(row.outerHTML);
+//                });
+//            } else {
+//                console.error("Appointments data is not in the expected format.");
+//            }
+//        })
+//        .catch(error => {
+//            console.error(error);
+//            alert(`Error fetching appointments: ${error.message}`);
+//        });
+//}
+//
+//// Call the fetchAppointments function when the page loads
+//window.onload = fetchAppointments;
+
+
+
+
+
+//function fetchAppointments() {
+//    fetch('http://localhost:8080/REGISTER-BACKEND/resources/student/fetch_appointment')
+//        .then(response => response.json())
+//        .then(responseData => {
+//            const appointments = responseData.appointments;
+//            const statusOptions = responseData.statusOptions.concat(["Accepted", "Rejected", "Completed"]);
+//
+//            console.log(appointments); // Log the fetched data
+//
+//            const appointmentsTable = document.getElementById('appointmentsTable');
+//
+//            if (Array.isArray(appointments)) {
+//                appointments.forEach(appointment => {
+//                    const row = appointmentsTable.insertRow(-1);
+//
+//                    // Iterate over keys of each appointment in the desired order
+//                    const keysOrder = ['id', 'fullName', 'email', 'phone', 'consultant', 'status'];
+//                    keysOrder.forEach(key => {
+//                        const cell = row.insertCell();
+//                        
+//                        if (key === 'fullName') {
+//                            // Display the name in a span
+//                            const fullNameSpan = document.createElement("span");
+//                            fullNameSpan.textContent = appointment[key];
+//                            fullNameSpan.className = "name-span";
+//                            cell.appendChild(fullNameSpan);
+//                        } else if (key === 'status') {
+//                            // Create and populate the status dropdown
+//                            const statusDropdown = document.createElement("select");
+//                            statusDropdown.className = "status-dropdown";
+//
+//                            // Add options to the dropdown
+//                            statusOptions.forEach(option => {
+//                                const optionElement = document.createElement("option");
+//                                optionElement.value = option;
+//                                optionElement.textContent = option;
+//
+//                                // Set the default selected value
+//                                if (option === appointment[key]) {
+//                                    optionElement.selected = true;
+//                                }
+//
+//                                statusDropdown.appendChild(optionElement);
+//                            });
+//
+//                            // Append the dropdown to the cell
+//                            cell.appendChild(statusDropdown);
+//                        } else {
+//                            // For other keys, just display the value
+//                            cell.textContent = appointment[key];
+//                        }
+//                    });
+//
+//                    // Create and append the edit button
+//                    const editButton = document.createElement("button");
+//                    editButton.className = "button";
+//                    editButton.textContent = "Edit";
+//                    editButton.onclick = () => editAppointment(appointment.id, row.cells[5].querySelector('.status-dropdown').value);
+//                    row.insertCell().appendChild(editButton);
+//
+//                    // Log the HTML of the entire row
+//                    console.log(row.outerHTML);
+//                });
+//            } else {
+//                console.error("Appointments data is not in the expected format.");
+//            }
+//        })
+//        .catch(error => {
+//            console.error(error);
+//            alert(`Error fetching appointments: ${error.message}`);
+//        });
+//}
+//
+//// Call the fetchAppointments function when the page loads
+//window.onload = fetchAppointments;
+
+
+
 
 function fetchAppointments() {
     fetch('http://localhost:8080/REGISTER-BACKEND/resources/student/fetch_appointment')
         .then(response => response.json())
-        .then(appointments => {
+        .then(responseData => {
+            const appointments = responseData.appointments;
+            const statusOptions = responseData.statusOptions.concat(["Accepted", "Rejected", "Completed"]);
+
             console.log(appointments); // Log the fetched data
 
             const appointmentsTable = document.getElementById('appointmentsTable');
 
-            appointments.forEach(appointment => {
-                const row = appointmentsTable.insertRow(-1); // -1 inserts at the end
+            if (Array.isArray(appointments)) {
+                appointments.forEach(appointment => {
+                    const row = appointmentsTable.insertRow(-1);
 
-                const idCell = row.insertCell(0);
-                const fullNameCell = row.insertCell(1);
-                const emailCell = row.insertCell(2);
-                const phoneCell = row.insertCell(3);
-                const consultantCell = row.insertCell(4);
-                const statusCell = row.insertCell(5);
-                const actionsCell = row.insertCell(6);
+                    // Iterate over keys of each appointment in the desired order
+                    const keysOrder = ['id', 'fullName', 'email', 'phone', 'consultant', 'status'];
+                    keysOrder.forEach(key => {
+                        const cell = row.insertCell();
 
-                idCell.textContent = appointment.id;
-                fullNameCell.innerHTML = `<input type="text" value="${appointment.fullName}">`;
-                emailCell.innerHTML = `<input type="text" value="${appointment.email}">`;
-                phoneCell.innerHTML = `<input type="text" value="${appointment.phone}">`;
-                consultantCell.innerHTML = `<input type="text" value="${appointment.consultant}">`;
+                        if (key === 'fullName') {
+                            // Create an input field for the name and disable editing
+                            const inputField = document.createElement("input");
+                            inputField.value = appointment[key];
+                            inputField.disabled = true;
+                            inputField.className = "input-field"; // Add the input field class
+                            cell.appendChild(inputField);
+                        } else if (key === 'status') {
+                            // Create and populate the status dropdown
+                            const statusDropdown = document.createElement("select");
+                            statusDropdown.className = "status-dropdown";
 
-                // Create a dropdown for the "Status" column
-                const statusDropdown = document.createElement("select");
-                statusDropdown.className = "status-dropdown";
+                            // Add options to the dropdown
+                            statusOptions.forEach(option => {
+                                const optionElement = document.createElement("option");
+                                optionElement.value = option;
+                                optionElement.textContent = option;
 
-                // Define the possible status options
-                const statusOptions = ["Pending", "Confirmed", "Cancelled"];
+                                // Set the default selected value
+                                if (option === appointment[key]) {
+                                    optionElement.selected = true;
+                                }
 
-                // Populate the dropdown options
-                statusOptions.forEach(option => {
-                    const statusOption = document.createElement("option");
-                    statusOption.value = option;
-                    statusOption.textContent = option;
-                    statusDropdown.appendChild(statusOption);
+                                statusDropdown.appendChild(optionElement);
+                            });
+
+                            // Append the dropdown to the cell
+                            cell.appendChild(statusDropdown);
+                        } else {
+                            // For other keys, create an input field and disable editing
+                            const inputField = document.createElement("input");
+                            inputField.value = appointment[key];
+                            inputField.disabled = true;
+                            inputField.className = "input-field"; // Add the input field class
+                            cell.appendChild(inputField);
+                        }
+                    });
+
+                    // Create and append the edit button
+                    const editButton = document.createElement("button");
+                    editButton.className = "button";
+                    editButton.textContent = "Edit";
+                    editButton.onclick = () => editAppointment(appointment.id, row.cells[5].querySelector('.status-dropdown').value);
+                    row.insertCell().appendChild(editButton);
+
+                    // Log the HTML of the entire row
+                    console.log(row.outerHTML);
                 });
-
-                // Set the initial selected status
-                statusDropdown.value = appointment.status;
-
-                // Append the dropdown to the status cell
-                statusCell.appendChild(statusDropdown);
-
-                const editButton = document.createElement("button");
-                editButton.className = "button";
-                editButton.textContent = "Edit";
-                editButton.onclick = () => editAppointment(appointment.id, statusDropdown.value);
-                actionsCell.appendChild(editButton);
-
-                // Log the HTML of the entire row
-                console.log(row.outerHTML);
-            });
+            } else {
+                console.error("Appointments data is not in the expected format.");
+            }
         })
         .catch(error => {
             console.error(error);
@@ -715,5 +1128,8 @@ function fetchAppointments() {
 
 // Call the fetchAppointments function when the page loads
 window.onload = fetchAppointments;
+
+
+
 
 
