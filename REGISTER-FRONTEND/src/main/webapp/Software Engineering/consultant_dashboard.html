@@ -70,8 +70,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 max-width: 900px;
                 margin: 0 auto;
                 padding: 40px;
-                background-color: #fff;
+/*                background-color: #fff;*/
                 margin-bottom: 40px;
+                margin-left: 50px;
             }
             .button {
                 padding: 10px 20px;
@@ -181,6 +182,45 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
  
         box-sizing: border-box; /* Include padding and border in the width */
     }
+    
+.appointments {
+    margin-top: 20px;
+    border-collapse: collapse;
+    width: 100%;
+    overflow-x: auto; /* Add horizontal scrolling if needed */
+     margin-top: 20px;
+    border-collapse: collapse;
+    width: 100%;
+    overflow-x: auto; /* Add horizontal scrolling if needed */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.appointments th, .appointments td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.appointments th {
+    background-color: #333;
+    color: #fff;
+    margin-bottom: 40px;
+}
+
+/* Set maximum width for specific cells */
+.appointments td:nth-child(1),
+.appointments td:nth-child(2),
+.appointments td:nth-child(3),
+.appointments td:nth-child(4),
+.appointments td:nth-child(5) {
+    max-width: 150px; /* Adjust the max-width as needed */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+    
 
 
 
@@ -201,35 +241,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             </nav>
         </header>
 
-        <div class="container"> 
-            <h1>Consultant Page</h1>
-            <h2>Appointment Requests</h2>
-            <table class="appointments">
-                <tr>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Job Seeker</th>
-                    <th>Actions</th>
-                </tr>
-                <tr>
-                    <td>2022-01-10</td>
-                    <td>09:00 AM</td>
-                    <td>John Smith</td>
-                    <td>
-                        <button class="button">Accept</button>
-                        <button class="button">Reject</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2022-01-12</td>
-                    <td>03:00 PM</td>
-                    <td>Jane Doe</td>
-                    <td>
-                        <button class="button">Accept</button>
-                        <button class="button">Reject</button>
-                    </td>
-                </tr>
-            </table>
+        
+
             
             
         <div class="container">
@@ -247,6 +260,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             </tr>
         </table>
     </div>
+        
+        <div class="container"> 
 
             <h2>Schedule New Appointment</h2>
             <form>
@@ -260,27 +275,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <button id="signupButton" onclick="addConsultant()">Schedule</button>
             </form>
 
-            <h2>Upcoming Appointments</h2>
-            <table class="appointments">
-                <tr>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Job Seeker</th>
-                    <th>Status</th>
-                </tr>
-                <tr>
-                    <td>2022-01-15</td>
-                    <td>02:00 PM</td>
-                    <td>Robert Johnson</td>
-                    <td>Upcoming</td>
-                </tr>
-                <tr>
-                    <td>2022-01-18</td>
-                    <td>10:30 AM</td>
-                    <td>Amy Wilson</td>
-                    <td>Upcoming</td>
-                </tr>
-            </table>
+
         </div>      
         <script src="Javascript/index.js"></script>
     </body>
