@@ -483,4 +483,60 @@ public Response fetchAppointmentsWithStatus() {
 //    @Consumes(MediaType.TEXT_HTML)
 //    public void putHtml(String content) {
 //    }
+//    
+//    @PUT
+//    @Path("/update_appointment")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public void updateAppointmentStatus(Map<String, Object> updateData) {
+//        // Extract data from the updateData map and update the appointment status
+//        if (DBUtils.updateAppointmentStatus(appointmentData)) {
+//            return Response.status(Response.Status.CREATED).build();
+//        } else {
+//            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+//        }
+//    }
+    
+    
+
+    
+//@POST
+//@Path("/update_appointment")
+//@Consumes(MediaType.APPLICATION_JSON)
+//@Produces(MediaType.APPLICATION_JSON)
+//public Response updateAppointmentStatus(AppointmentData appointmentData) {
+//    if (updateStatus(appointmentData)) {
+//        return Response.status(Response.Status.OK).build();
+//    } else {
+//        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+//    }
+//}
+//
+//private boolean updateStatus(AppointmentData appointmentData) {
+//    DBUtils.updateAppointmentStatus(appointmentData.getId(), appointmentData.getStatus());
+//    return true;
+//}
+    
+    
+    
+
+
+    @PUT
+    @Path("/update_appointment")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateAppointmentStatus(AppointmentData appointment) {
+        boolean updateSuccessful = DBUtils.updateAppointmentStatus(appointment.getId(), appointment.getStatus());
+
+        if (updateSuccessful) {
+            return Response.status(200).entity("Status successfully updated").build();
+        } else {
+            return Response.status(500).entity("status Not updated").build();
+        }
+    }
+
+    
+
+
+ 
+
+    
 }

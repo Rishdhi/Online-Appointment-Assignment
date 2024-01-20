@@ -15,9 +15,16 @@ import java.util.List;
 import Classes.User;
 import Classes.User_Cyber_Security;
 import Classes.Consultants;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.sql.PreparedStatement;
 import java.util.HashMap;
 import java.util.Map;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -537,6 +544,41 @@ public static boolean authenticateCyberUser(User_Cyber_Security cyber_user) {
 
     return statusOptions;
 }
+ 
+ 
+ 
+// public static void updateAppointmentStatus(int id, String newStatus) {
+//        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASS)) {
+//            String query = "UPDATE `appointments`.`appointmentdata` SET `status` = ? WHERE `id` = ?";
+//            try (PreparedStatement statement = con.prepareStatement(query)) {
+//                statement.setString(1, newStatus);
+//                statement.setInt(2, id);
+//                statement.executeUpdate();
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+// 
+// 
+ 
+ 
+public static boolean updateAppointmentStatus(int id, String newStatus) {
+        boolean updateSuccessful = false;
+        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASS)) {
+            String query = "UPDATE `appointments`.`appointmentdata` SET `status` = ? WHERE `id` = ?";
+            try (PreparedStatement statement = con.prepareStatement(query)) {
+                statement.setString(1, newStatus);
+                statement.setInt(2, id);
+                int rowsAffected = statement.executeUpdate();
+                updateSuccessful = (rowsAffected > 0);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return updateSuccessful;
+    }
+ 
 
     
    
