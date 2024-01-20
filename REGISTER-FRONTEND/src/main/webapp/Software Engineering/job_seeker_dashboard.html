@@ -9,8 +9,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!--        <link rel="stylesheet" href="./dashboard.css">-->
-        <style>
-
+        <style> 
+            
             body {
                 font-family: Arial, sans-serif;
                 background-color: #f2f2f2;
@@ -48,39 +48,39 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 color: #fff;
                 margin-bottom: 40px;
             }
+            
 
+#jobSeekerForm {
+    max-width: 400px; /* Set a maximum width for the form */
+    margin: 0 auto; /* Center the form horizontally */
+    padding: 20px; /* Add padding for spacing */
+    background-color: #fff; /* Set a background color for the form */
+    border-radius: 8px; /* Add rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
 
-            #jobSeekerForm {
-                max-width: 400px; /* Set a maximum width for the form */
-                margin: 0 auto; /* Center the form horizontally */
-                padding: 20px; /* Add padding for spacing */
-                background-color: #fff; /* Set a background color for the form */
-                border-radius: 8px; /* Add rounded corners */
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
-            }
+#jobSeekerForm label {
+    display: block;
+    margin-bottom: 8px;
+}
 
-            #jobSeekerForm label {
-                display: block;
-                margin-bottom: 8px;
-            }
+#jobSeekerForm input,
+#jobSeekerForm select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
 
-            #jobSeekerForm input,
-            #jobSeekerForm select {
-                width: 100%;
-                padding: 10px;
-                margin-bottom: 16px;
-                box-sizing: border-box;
-            }
-
-            #jobSeekerForm button {
-                width: 100%;
-                padding: 10px 20px;
-                background-color: #333;
-                color: #fff;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            }
+#jobSeekerForm button {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
 
         </style>
@@ -147,35 +147,35 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         </div>
 
 
+            
+  
 
 
+<form id="jobSeekerForm">
+    <label for="fullName">Full Name:</label>
+    <input type="text" id="fullName" name="fullName" required><br>
 
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br>
 
-        <form id="jobSeekerForm">
-            <label for="fullName">Full Name:</label>
-            <input type="text" id="fullName" name="fullName" required><br>
+    <label for="phone">Phone:</label>
+    <input type="tel" id="phone" name="phone" required><br>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br>
+    <label for="consultant">Select Consultant:</label>
+    <select id="consultant" name="consultant"></select><br>
 
-            <label for="phone">Phone:</label>
-            <input type="tel" id="phone" name="phone" required><br>
+    <label for="status">Status:</label>
+    <select id="status" name="status" disabled>
+        <option value="pending">Pending</option>
+        <option value="accepted">Accepted</option>
+        <option value="rejected">Rejected</option>
+        <option value="Completed">Completed</option>
+    </select><br>
 
-            <label for="consultant">Select Consultant:</label>
-            <select id="consultant" name="consultant"></select><br>
+<!--    <button type="button" id="bookAppointmentBtn">Book Appointment</button>-->
+    <button type="button" id="bookAppointmentBtn" onclick="bookAppointment()">Book Appointment</button>
 
-            <label for="status">Status:</label>
-            <select id="status" name="status" disabled>
-                <option value="pending">Pending</option>
-                <option value="accepted">Accepted</option>
-                <option value="rejected">Rejected</option>
-                <option value="Completed">Completed</option>
-            </select><br>
-
-            <!--    <button type="button" id="bookAppointmentBtn">Book Appointment</button>-->
-            <button type="button" id="bookAppointmentBtn" onclick="bookAppointment()">Book Appointment</button>
-
-        </form>
+</form>
 
 
         <script>
@@ -247,68 +247,68 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 });
             }
 
-            // Call the viewConsultants function when the page loads
+    // Call the viewConsultants function when the page loads
             window.onload = viewConsultants;
+            
+            
+            
+            
+            
+document.addEventListener("DOMContentLoaded", function () {
+    // Fetch consultant names from the API endpoint
+    fetch("http://localhost:8080/REGISTER-BACKEND/resources/student/con_names")
+        .then(response => response.json())
+        .then(consultantNames => {
+            // Populate the dropdown with fetched consultant names
+            const consultantDropdown = document.getElementById("consultant");
 
-
-
-
-
-            document.addEventListener("DOMContentLoaded", function () {
-                // Fetch consultant names from the API endpoint
-                fetch("http://localhost:8080/REGISTER-BACKEND/resources/student/con_names")
-                        .then(response => response.json())
-                        .then(consultantNames => {
-                            // Populate the dropdown with fetched consultant names
-                            const consultantDropdown = document.getElementById("consultant");
-
-                            consultantNames.forEach(name => {
-                                const option = document.createElement("option");
-                                option.value = name;
-                                option.textContent = name;
-                                consultantDropdown.appendChild(option);
-                            });
-                        })
-                        .catch(error => console.error("Error fetching consultant names:", error));
+            consultantNames.forEach(name => {
+                const option = document.createElement("option");
+                option.value = name;
+                option.textContent = name;
+                consultantDropdown.appendChild(option);
             });
+        })
+        .catch(error => console.error("Error fetching consultant names:", error));
+});
 
 
 
-            function bookAppointment() {
-                // Get form values
-                const fullName = document.getElementById('fullName').value;
-                const email = document.getElementById('email').value;
-                const phone = document.getElementById('phone').value;
-                const selectedConsultant = document.getElementById('consultant').value;
-                const selectedStatus = document.getElementById('status').value;
+function bookAppointment() {
+        // Get form values
+        const fullName = document.getElementById('fullName').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const selectedConsultant = document.getElementById('consultant').value;
+        const selectedStatus = document.getElementById('status').value;
 
-                // Create appointment data object
-                const appointmentData = {
-                    fullName: fullName,
-                    email: email,
-                    phone: phone,
-                    consultant: selectedConsultant,
-                    status: selectedStatus
-                };
+        // Create appointment data object
+        const appointmentData = {
+            fullName: fullName,
+            email: email,
+            phone: phone,
+            consultant: selectedConsultant,
+            status: selectedStatus
+        };
 
-                // Make API call to add appointment
-                fetch("http://localhost:8080/REGISTER-BACKEND/resources/student/book", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(appointmentData),
-                })
-                        .then(response => {
-                            if (response.status === 201) {
-                                alert('Appointment booked successfully!');
-                            } else {
-                                alert('Failed to book appointment. Please try again.');
-                            }
-                        })
-                        .catch(error => console.error("Error booking appointment:", error));
-            }
-
+        // Make API call to add appointment
+        fetch("http://localhost:8080/REGISTER-BACKEND/resources/student/book", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(appointmentData),
+        })
+            .then(response => {
+                if (response.status === 201) {
+                    alert('Appointment booked successfully!');
+                } else {
+                    alert('Failed to book appointment. Please try again.');
+                }
+            })
+            .catch(error => console.error("Error booking appointment:", error));
+    }
+            
 
         </script>
 

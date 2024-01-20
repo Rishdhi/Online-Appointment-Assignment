@@ -20,11 +20,15 @@ import com.google.gson.GsonBuilder;
 import java.sql.PreparedStatement;
 import java.util.HashMap;
 import java.util.Map;
+
+import java.util.HashMap;
+import java.util.Map;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 
 /**
  *
@@ -461,34 +465,35 @@ public static boolean authenticateCyberUser(User_Cyber_Security cyber_user) {
     }
  
  
-// 
-//     public static List<AppointmentData> fetchAppointments() {
-//        List<AppointmentData> appointments = new ArrayList<>();
-//
-//  
-//        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASS)) {
-//            String query = "SELECT * FROM `appointments`.`appointmentdata`";
-//            try (PreparedStatement statement = con.prepareStatement(query)) {
-//                try (ResultSet resultSet = statement.executeQuery()) {
-//                    while (resultSet.next()) {
-//                        AppointmentData appointment = new AppointmentData();
-//                        appointment.setId(resultSet.getInt("id"));
-//                        appointment.setFullName(resultSet.getString("full_name"));
-//                        appointment.setEmail(resultSet.getString("email"));
-//                        appointment.setPhone(resultSet.getString("phone"));
-//                        appointment.setConsultant(resultSet.getString("consultant"));
-//                        appointment.setStatus(resultSet.getString("status"));
-//                        appointments.add(appointment);
-//                    }
-//                }
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return appointments;
-//    }
+ 
+     public static List<AppointmentData> fetchAppointments() {
+        List<AppointmentData> appointments = new ArrayList<>();
+
+  
+        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASS)) {
+            String query = "SELECT * FROM `appointments`.`appointmentdata`";
+            try (PreparedStatement statement = con.prepareStatement(query)) {
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        AppointmentData appointment = new AppointmentData();
+                        appointment.setId(resultSet.getInt("id"));
+                        appointment.setFullName(resultSet.getString("full_name"));
+                        appointment.setEmail(resultSet.getString("email"));
+                        appointment.setPhone(resultSet.getString("phone"));
+                        appointment.setConsultant(resultSet.getString("consultant"));
+                        appointment.setStatus(resultSet.getString("status"));
+                        appointments.add(appointment);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return appointments;
+    }
     
+
  
  
  
@@ -580,6 +585,6 @@ public static boolean updateAppointmentStatus(int id, String newStatus) {
     }
  
 
-    
+
    
 }  
