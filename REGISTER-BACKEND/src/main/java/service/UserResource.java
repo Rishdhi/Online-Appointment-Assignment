@@ -27,6 +27,8 @@ import db.DBUtils;
 import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.util.HashMap;
+import java.util.Map;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -353,6 +355,23 @@ public Response authenticateUser(User user) {
         }
     }
     
+    @GET
+    @Path("/fetch_appointment")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAppointments() {
+        DBUtils dbUtils = new DBUtils();
+        List<AppointmentData> appointments = dbUtils.getAllAppointments();
+
+        if (appointments != null && !appointments.isEmpty()) {
+            // Return success with the list of appointments
+            return Response.ok(appointments).build();
+        } else {
+            // Return failure with an error message
+            return Response.status(Response.Status.NOT_FOUND).entity("No appointments found.").build();
+        }
+    }
+    
+    
     
     
     
@@ -371,20 +390,40 @@ public Response authenticateUser(User user) {
         }
     }
     
-    @GET
-    @Path("/fetch_appointment")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response fetchAppointments() {
-        
-            List<AppointmentData> appointments = DBUtils.fetchAppointments();
-                    if (appointments != null && !appointments.isEmpty()) {
-            // Return success with the list of names
-            return Response.ok(appointments).build();
-        } else {
-            // Return failure with an error message
-            return Response.status(Response.Status.NOT_FOUND).entity("No consultant names found.").build();
-        }
-    }
+    
+//    @GET
+//    @Path("/appointments")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response getAppointments() {
+//        List<AppointmentData> appointments = DBUtils.fetchAppointmentsWithStatus();
+//
+//        if (appointments != null && !appointments.isEmpty()) {
+//            // Return success with the list of appointments
+//            return Response.ok(appointments).build();
+//        } else {
+//            // Return failure with an error message
+//            return Response.status(Response.Status.NOT_FOUND).entity("No appointments found.").build();
+//        }
+//    }
+    
+    
+//    @GET
+//    @Path("/fetch_appointment")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response fetchAppointments() {
+//        
+//            List<AppointmentData> appointments = DBUtils.fetchAppointments();
+//                    if (appointments != null && !appointments.isEmpty()) {
+//            // Return success with the list of names
+//            return Response.ok(appointments).build();
+//        } else {
+//            // Return failure with an error message
+//            return Response.status(Response.Status.NOT_FOUND).entity("No consultant names found.").build();
+//        }
+//    }
+    
+    
+    
     
     
     
@@ -493,18 +532,18 @@ public Response authenticateUser(User user) {
     
 
 
-    @PUT
-    @Path("/update_appointment")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateAppointmentStatus(AppointmentData appointment) {
-        boolean updateSuccessful = DBUtils.updateAppointmentStatus(appointment.getId(), appointment.getStatus());
-
-        if (updateSuccessful) {
-            return Response.status(200).entity("Status successfully updated").build();
-        } else {
-            return Response.status(500).entity("status Not updated").build();
-        }
-    }
+//    @PUT
+//    @Path("/update_appointment")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public Response updateAppointmentStatus(AppointmentData appointment) {
+//        boolean updateSuccessful = DBUtils.updateAppointmentStatus(appointment.getId(), appointment.getStatus());
+//
+//        if (updateSuccessful) {
+//            return Response.status(200).entity("Status successfully updated").build();
+//        } else {
+//            return Response.status(500).entity("status Not updated").build();
+//        }
+//    }
 
     
 
