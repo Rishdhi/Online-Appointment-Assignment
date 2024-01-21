@@ -1385,13 +1385,36 @@ window.onload = fetchAppointments;
 
 function createInputCell(row, cellIndex, value, dataId, fieldName) {
     const cell = row.insertCell(cellIndex);
-    const input = document.createElement("input");
-    input.type = "text";
-    input.value = value;
-    input.setAttribute("data-id", dataId);  // Set data-id attribute
-    input.setAttribute("data-field", fieldName); // Set data-field attribute for identification
 
-    cell.appendChild(input);
+    if (fieldName === "status") {
+        // Create a dropdown for the status field
+        const dropdown = document.createElement("select");
+        const options = ["Pending", "Accepted", "Rejected", "Completed"];
+
+        options.forEach(optionValue => {
+            const option = document.createElement("option");
+            option.value = optionValue;
+            option.text = optionValue;
+            dropdown.appendChild(option);
+        });
+
+        dropdown.value = value; // Set the default value
+
+        dropdown.setAttribute("data-id", dataId);
+        dropdown.setAttribute("data-field", fieldName);
+
+        cell.appendChild(dropdown);
+    } else {
+        // Create input field for other columns
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = value;
+        input.setAttribute("data-id", dataId);
+        input.setAttribute("data-field", fieldName);
+
+        cell.appendChild(input);
+    }
+
     return cell;
 }
 
