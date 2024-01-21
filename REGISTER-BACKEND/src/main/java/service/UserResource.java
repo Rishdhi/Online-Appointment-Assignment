@@ -374,6 +374,37 @@ public Response authenticateUser(User user) {
     
     
     
+//    @PUT
+//    @Path("/update_appointment")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response updateAppointment(AppointmentData appointment) {
+//        DBUtils dbUtils = new DBUtils();
+//        dbUtils.updateAppointment(appointment);
+//
+//        return Response.ok().build();
+//    }
+    
+    
+    @PUT
+    @Path("/updateAppointment")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateAppointment(String json) {
+        Gson gson = new GsonBuilder().create();
+        AppointmentData appointmentdata = gson.fromJson(json, AppointmentData.class);
+        
+        DBUtils utils = new DBUtils(); 
+        boolean result = utils.updateAppointment(appointmentdata);
+        if (result) {
+            return Response.status(200).entity("Appointment data successfully updated").build();
+            
+        } else {
+            return Response.status(500).entity("Appointment data Not updated").build();
+        }
+    }
+    
+    
+    
+    
     
     @GET
     @Path("/con_names")

@@ -1046,10 +1046,271 @@ function addConsultant() {
 
 
 
+// 100% working fetch appointments code
 
+//function fetchAppointments() {
+//    // Make an API request to retrieve all appointments
+//    //fetch('http://localhost:8080/REGISTER-BACKEND/resources/student/fetch_appointment')
+//    fetch("http://localhost:8080/REGISTER-BACKEND/resources/student/fetch_appointment", {
+//        method: "GET",
+//        headers: {
+//            "Content-Type": "application/json",
+//        },
+//    })
+//        .then((response) => {
+//            if (response.status === 200) {
+//                return response.json();
+//            } else {
+//                throw new Error("Failed to fetch appointments");
+//            }
+//        })
+//        .then((appointments) => {
+//            // Display the appointments in the HTML table
+//            displayAppointments(appointments);
+//        })
+//        .catch((error) => {
+//            // Handle errors and display an error message
+//            console.error(error);
+//        });
+//}
+//
+//function displayAppointments(appointments) {
+//    const table = document.getElementById("appointmentsTable");
+//
+//    // Clear existing rows
+//    while (table.rows.length > 1) {
+//        table.deleteRow(1);
+//    }
+//
+//    // Populate the table with fetched appointments
+//    appointments.forEach((appointment, index) => {
+//        const row = table.insertRow(index + 1);
+//        const idCell = row.insertCell(0);
+//        const nameCell = row.insertCell(1);
+//        const emailCell = row.insertCell(2);
+//        const phoneCell = row.insertCell(3);
+//        const consultantCell = row.insertCell(4);
+//        const statusCell = row.insertCell(5);
+//
+//        idCell.textContent = appointment.id;
+//        nameCell.textContent = appointment.fullName;
+//        emailCell.textContent = appointment.email;
+//        phoneCell.textContent = appointment.phone;
+//        consultantCell.textContent = appointment.consultant;
+//        statusCell.textContent = appointment.status;
+//    });
+//}
+//
+//// Call the fetchAppointments function when the page loads
+//window.onload = fetchAppointments;
+
+
+
+
+// Function to create input cell
+//function createInputCell(row, cellIndex, value, id) {
+//    const cell = row.insertCell(cellIndex);
+//    const input = document.createElement("input");
+//    input.type = "text";
+//    input.value = value;
+//    input.id = id;
+//    cell.appendChild(input);
+//    return cell;
+//}
+
+
+const updurl = "http://localhost:8080/REGISTER-BACKEND/resources/student/updateAppointment";
+
+
+//function editAppointment(appointmentId) {
+//    console.log("Editing appointment with ID:", appointmentId);
+//    const person = {
+//        "id": document.getElementById("id").value,
+//        "full_name": document.getElementById("full_name").value,
+//        "email": document.getElementById("email").value,
+//        "phone": document.getElementById("phone").value,
+//        "consultant": document.getElementById("consultant").value,
+//        "status": document.getElementById("status").value
+//    
+//            
+//    };
+//
+//    const options = {
+//        method: "PUT",
+//        headers: {
+//            "content-type": "application/json"
+//        },
+//        body: JSON.stringify(person)
+//    };
+//
+//    fetch(updurl, options)
+//        .then(response => {
+//            if (response.status === 200) {
+//                // Display a success message in the apiResponse div
+//                alert("Student successfully updated!");
+//                //apiResponse.innerHTML = "Student successfully updated!";
+//            } else {
+//                // Handle other status codes here
+//                //apiResponse.innerHTML = "Error updating student.";alert("Student successfully updated!");
+//                alert("Student not successfully updated!");
+//                throw new Error("Error: " + response.status);
+//            }
+//        })
+//        .catch(error => {
+//            console.error(error);
+//        });
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//function editAppointment(appointmentId) {
+//    console.log("Editing appointment with ID:", appointmentId);
+//
+//    const row = document.querySelector(`[data-id="${appointmentId}"]`);
+//    if (!row) {
+//        console.error(`Row with ID ${appointmentId} not found.`);
+//        return;
+//    }
+//
+//    // Find input fields within the row using data-id attribute
+//    const idInput = row.querySelector('[data-id="id"]').value;
+//    const nameInput = row.querySelector('[data-id="full_name"]').value;
+//    const emailInput = row.querySelector('[data-id="email"]').value;
+//    const phoneInput = row.querySelector('[data-id="phone"]').value;
+//    const consultantInput = row.querySelector('[data-id="consultant"]').value;
+//    const statusInput = row.querySelector('[data-id="status"]').value;
+//
+//    const updatedAppointment = {
+//        id: parseInt(idInput),
+//        fullName: nameInput,
+//        email: emailInput,
+//        phone: phoneInput,
+//        consultant: consultantInput,
+//        status: statusInput,
+//    };
+//
+//    const updurl = "http://localhost:8080/REGISTER-BACKEND/resources/student/updateAppointment";
+//
+//    const options = {
+//        method: "PUT",
+//        headers: {
+//            "content-type": "application/json"
+//        },
+//        body: JSON.stringify(updatedAppointment)
+//    };
+//
+//    fetch(updurl, options)
+//        .then(response => {
+//            if (response.status === 200) {
+//                // Display a success message in the apiResponse div
+//                alert("Student successfully updated!");
+//            } else {
+//                // Handle other status codes here
+//                alert("Student not successfully updated!");
+//                throw new Error("Error: " + response.status);
+//            }
+//        })
+//        .catch(error => {
+//            console.error(error);
+//        });
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//// Function to handle editAppointment
+//function editAppointment(appointmentId) {
+//    // Add your logic to handle editing appointment with the given ID
+//    console.log("Editing appointment with ID:", appointmentId);
+//
+//    // Prompt the user to enter updated data
+//    const updatedName = prompt("Enter updated name:");
+//    const updatedEmail = prompt("Enter updated email:");
+//    const updatedPhone = prompt("Enter updated phone:");
+//    const updatedConsultant = prompt("Enter updated consultant:");
+//    const updatedStatus = prompt("Enter updated status:");
+//
+//    // Populate input fields with the entered data
+//    const idInput = document.getElementById("id");
+//    const nameInput = document.getElementById("name");
+//    const emailInput = document.getElementById("email");
+//    const phoneInput = document.getElementById("phone");
+//    const consultantInput = document.getElementById("consultant");
+//    const statusInput = document.getElementById("status");
+//
+//    idInput.value = appointmentId;
+//    nameInput.value = updatedName;
+//    emailInput.value = updatedEmail;
+//    phoneInput.value = updatedPhone;
+//    consultantInput.value = updatedConsultant;
+//    statusInput.value = updatedStatus;
+//
+//    // Construct the updatedAppointment object
+//    const updatedAppointment = {
+//        id: parseInt(appointmentId),
+//        fullName: updatedName,
+//        email: updatedEmail,
+//        phone: updatedPhone,
+//        consultant: updatedConsultant,
+//        status: updatedStatus,
+//    };
+//
+//    // Make an API request to update the appointment
+//    fetch("http://localhost:8080/REGISTER-BACKEND/resources/student/updateAppointment", {
+//        method: "PUT",
+//        headers: {
+//            "Content-Type": "application/json",
+//        },
+//        body: JSON.stringify(updatedAppointment),
+//    })
+//        .then((response) => {
+//            if (response.status === 200) {
+//                console.log("Appointment updated successfully");
+//                alert("Appointment updated successfully");
+//                // Add any additional logic or UI updates as needed
+//            } else {
+//                throw new Error("Failed to update appointment");
+//                alert("Failed to update appointment");
+//            }
+//        })
+//        .catch((error) => {
+//            console.error(error);
+//            alert("Failed to update appointment");
+//        });
+//}
+//
+//// Function to display alerts
+//function showAlert(message) {
+//    alert(message);
+//}
+
+// Function to fetch appointments
 function fetchAppointments() {
     // Make an API request to retrieve all appointments
-    //fetch('http://localhost:8080/REGISTER-BACKEND/resources/student/fetch_appointment')
     fetch("http://localhost:8080/REGISTER-BACKEND/resources/student/fetch_appointment", {
         method: "GET",
         headers: {
@@ -1070,9 +1331,11 @@ function fetchAppointments() {
         .catch((error) => {
             // Handle errors and display an error message
             console.error(error);
+            showAlert("Failed to fetch appointments");
         });
 }
 
+// Function to display appointments in the HTML table
 function displayAppointments(appointments) {
     const table = document.getElementById("appointmentsTable");
 
@@ -1084,26 +1347,97 @@ function displayAppointments(appointments) {
     // Populate the table with fetched appointments
     appointments.forEach((appointment, index) => {
         const row = table.insertRow(index + 1);
-        const idCell = row.insertCell(0);
-        const nameCell = row.insertCell(1);
-        const emailCell = row.insertCell(2);
-        const phoneCell = row.insertCell(3);
-        const consultantCell = row.insertCell(4);
-        const statusCell = row.insertCell(5);
+        row.setAttribute("data-id", appointment.id); // Set data-id attribute
 
-        idCell.textContent = appointment.id;
-        nameCell.textContent = appointment.fullName;
-        emailCell.textContent = appointment.email;
-        phoneCell.textContent = appointment.phone;
-        consultantCell.textContent = appointment.consultant;
-        statusCell.textContent = appointment.status;
+        // Create and append input fields to each cell
+        createInputCell(row, 0, appointment.id, "id", "id");
+        createInputCell(row, 1, appointment.fullName, "name", "fullName");
+        createInputCell(row, 2, appointment.email, "email", "email");
+        createInputCell(row, 3, appointment.phone, "phone", "phone");
+        createInputCell(row, 4, appointment.consultant, "consultant", "consultant");
+        createInputCell(row, 5, appointment.status, "status", "status");
+
+        const actionsCell = row.insertCell(6); // Added cell for actions
+
+        // Create Edit button
+        const editButton = document.createElement("button");
+        editButton.innerHTML = "Edit";
+        editButton.className = "button";
+        editButton.onclick = function () {
+            // Call the editAppointment function with the appointment ID
+            const rowId = row.getAttribute("data-id");
+            editAppointment(rowId);
+        };
+
+        // Append Edit button to actionsCell
+        actionsCell.appendChild(editButton);
     });
 }
+
 
 // Call the fetchAppointments function when the page loads
 window.onload = fetchAppointments;
 
 
+
+
+
+
+function createInputCell(row, cellIndex, value, dataId, fieldName) {
+    const cell = row.insertCell(cellIndex);
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = value;
+    input.setAttribute("data-id", dataId);  // Set data-id attribute
+    input.setAttribute("data-field", fieldName); // Set data-field attribute for identification
+
+    cell.appendChild(input);
+    return cell;
+}
+
+function editAppointment(appointmentId) {
+    console.log("Editing appointment with ID:", appointmentId);
+
+    const row = document.querySelector(`[data-id="${appointmentId}"]`);
+    if (!row) {
+        console.error(`Row with ID ${appointmentId} not found.`);
+        return;
+    }
+
+    // Find input fields within the row using data-id attribute
+    const inputs = row.querySelectorAll('[data-id]');
+
+    const updatedAppointment = {};
+    inputs.forEach(input => {
+        const fieldName = input.getAttribute("data-field");
+        updatedAppointment[fieldName] = input.value;
+    });
+
+    const updurl = "http://localhost:8080/REGISTER-BACKEND/resources/student/updateAppointment";
+
+    const options = {
+        method: "PUT",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify(updatedAppointment)
+    };
+
+    fetch(updurl, options)
+        .then(response => {
+            if (response.status === 200) {
+                // Display a success message
+                alert("Student successfully updated!");
+            } else {
+                // Handle other status codes here
+                alert("Student not successfully updated!");
+                throw new Error("Error: " + response.status);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
 
 
 

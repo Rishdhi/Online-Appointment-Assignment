@@ -617,6 +617,61 @@ public static boolean authenticateCyberUser(User_Cyber_Security cyber_user) {
 // 
 // 
  
+
+
+//    public boolean updateAppointment(AppointmentData appointment) {
+//        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
+//            String sql = "UPDATE `appointments`.`appointmentdata` SET `full_name` = ?, `email` = ?, `phone` = ?, `consultant` = ?, `status` = ? WHERE (`id` = ?)";
+//            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+//                stmt.setString(1, appointment.getFullName());
+//                stmt.setString(2, appointment.getEmail());
+//                stmt.setString(3, appointment.getPhone());
+//                stmt.setString(4, appointment.getConsultant());
+//                stmt.setString(5, appointment.getStatus());
+//                stmt.setInt(6, appointment.getId());
+//
+//                int rowsUpdated = stmt.executeUpdate();
+//                return rowsUpdated > 0;
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+//    }
+    
+// Update the `updateAppointment` method to use PreparedStatement
+public boolean updateAppointment(AppointmentData appointment) {
+    try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
+        String updateQuery = "UPDATE `appointments`.`appointmentdata` SET " +
+                "`full_name` = ?, " +
+                "`email` = ?, " +
+                "`phone` = ?, " +
+                "`consultant` = ?, " +
+                "`status` = ? " +
+                "WHERE (`id` = ?)";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(updateQuery)) {
+            pstmt.setString(1, appointment.getFullName());
+            pstmt.setString(2, appointment.getEmail());
+            pstmt.setString(3, appointment.getPhone());
+            pstmt.setString(4, appointment.getConsultant());
+            pstmt.setString(5, appointment.getStatus());
+            pstmt.setInt(6, appointment.getId());
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            return rowsAffected > 0;
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return false;
+}
+
+
+ 
+ 
  
 //public static boolean updateAppointmentStatus(int id, String newStatus) {
 //        boolean updateSuccessful = false;
