@@ -403,6 +403,50 @@ public Response authenticateUser(User user) {
     }
     
     
+//    @Path("{appointmentId}")
+//    @DELETE
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response deleteAppointmentById(@PathParam("appointmentId") int appointmentId) {
+//        if (DBUtils.deleteAppointmentById(appointmentId)) {
+//            return Response.ok("Appointment deleted successfully.").build();
+//        } else {
+//            return Response.status(Response.Status.NOT_FOUND).entity("Appointment not found or unable to delete.").build();
+//        }
+//    }
+//    
+    
+     @DELETE
+    @Path("/delete_appointment/{appointmentId}")
+    public Response deleteAppointment(@PathParam("appointmentId") int appointmentId) {
+        try {
+            boolean result = DBUtils.deleteAppointmentById(appointmentId);
+
+            if (result) {
+                return Response.status(Response.Status.OK).entity("Appointment deleted successfully").build();
+            } else {
+                return Response.status(Response.Status.NOT_FOUND).entity("Appointment not found").build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error deleting appointment").build();
+        }
+    }
+    
+    
+    
+//@DELETE
+//@Path("{appointmentId}")
+//public Response deleteAppointment(@PathParam("appointmentId") int appointmentId) {
+//    DBUtils utils = new DBUtils(); 
+//    boolean result = utils.deleteAppointment(appointmentId);
+//    if (result) {
+//        return Response.status(200).build();
+//    } else {
+//        return Response.status(500).build();
+//    }
+//}
+
+    
     
     
     
@@ -420,6 +464,13 @@ public Response authenticateUser(User user) {
             return Response.status(Response.Status.NOT_FOUND).entity("No consultant names found.").build();
         }
     }
+    
+    
+    
+    
+    
+    
+    
     
     
 //    @GET

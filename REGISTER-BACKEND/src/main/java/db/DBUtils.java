@@ -691,5 +691,43 @@ public boolean updateAppointment(AppointmentData appointment) {
  
 
 
+
+
+
+public static boolean deleteAppointmentById(int appointmentId) {
+    String query = "DELETE FROM `appointments`.`appointmentdata` WHERE id = ?";
+    
+    try (Connection con = DriverManager.getConnection(DB_URL, USER, PASS);
+         PreparedStatement statement = con.prepareStatement(query)) {
+        
+        statement.setInt(1, appointmentId);
+        int rowsAffected = statement.executeUpdate();
+        return rowsAffected > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+
+    
+    
+//    public boolean deleteAppointment(int appointmentId) {
+//          try {
+//            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+//            try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+//                Statement stmt = conn.createStatement();
+//             ) {		      
+//               stmt.executeUpdate("DELETE FROM `appointments`.`appointmentdata` WHERE (id = '" + appointmentId + "')");
+//               return true;
+//             } catch (SQLException e) {
+//                 System.out.println(e);
+//             } 
+//        } catch(SQLException e) {
+//            System.out.println(e);
+//        }     
+//        return false;
+//    }
+    
+    
    
 }  

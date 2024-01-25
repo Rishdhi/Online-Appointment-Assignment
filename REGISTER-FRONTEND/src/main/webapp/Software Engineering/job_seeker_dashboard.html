@@ -82,6 +82,38 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     cursor: pointer;
 }
 
+            .container {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 40px;
+/*                background-color: #fff;*/
+                margin-bottom: 40px;
+                margin-left: 50px;
+                margin-top: 25px;
+            }
+            .button {
+                padding: 10px 20px;
+                background-color: #333;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            .appointments {
+                margin-top: 20px;
+                border-collapse: collapse;
+                width: 100%;
+            }
+            .appointments th, .appointments td {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+                text-align: left;
+            }
+            .appointments th {
+                background-color: #333;
+                color: #fff;
+                margin-bottom: 40px;
+            }
 
         </style>
     </head>
@@ -174,8 +206,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
 <!--    <button type="button" id="bookAppointmentBtn">Book Appointment</button>-->
     <button type="button" id="bookAppointmentBtn" onclick="bookAppointment()">Book Appointment</button>
+    
+        
 
 </form>
+        
+        
+        <div class="container">
+        <h1>Consultant Page</h1>
+        <h2>Appointment Requests</h2>
+        <table class="appointments" id="appointmentsTable">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Consultant</th>
+                <th>Status</th>
+                
+            </tr>
+        </table>
+    </div>
 
 
         <script>
@@ -248,7 +299,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             }
 
     // Call the viewConsultants function when the page loads
-            window.onload = viewConsultants;
+            //window.onload = viewConsultants;
 
             
             
@@ -309,6 +360,172 @@ function bookAppointment() {
             })
             .catch(error => console.error("Error booking appointment:", error));
     }
+    
+    
+    
+    
+    
+    
+    function fetchAppointments() {
+    // Make an API request to retrieve all appointments
+    fetch("http://localhost:8080/REGISTER-BACKEND/resources/student/fetch_appointment", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then((response) => {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error("Failed to fetch appointments");
+            }
+        })
+        .then((appointments) => {
+            // Display the appointments in the HTML table
+            displayAppointments(appointments);
+        })
+        .catch((error) => {
+            // Handle errors and display an error message
+            console.error(error);
+            showAlert("Failed to fetch appointments");
+        });
+}
+
+function displayAppointments(appointments) {
+    const table = document.getElementById("appointmentsTable");
+
+    // Clear existing rows
+    while (table.rows.length > 1) {
+        table.deleteRow(1);
+    }
+
+    // Populate the table with fetched appointments
+    appointments.forEach((appointment, index) => {
+        const row = table.insertRow(index + 1);
+
+        // Create and append input fields to each cell
+        createInputCell(row, 0, appointment.id, "id", "id");
+        createInputCell(row, 1, appointment.fullName, "name", "fullName");
+        createInputCell(row, 2, appointment.email, "email", "email");
+        createInputCell(row, 3, appointment.phone, "phone", "phone");
+        createInputCell(row, 4, appointment.consultant, "consultant", "consultant");
+        createInputCell(row, 5, appointment.status, "status", "status");
+    });
+}
+
+// Function to create input cells for the table
+function createInputCell(row, cellIndex, value, dataId, fieldName) {
+    const cell = row.insertCell(cellIndex);
+
+    // Create input field for all columns
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = value;
+    input.setAttribute("data-id", dataId);
+    input.setAttribute("data-field", fieldName);
+    
+    // Disable input fields to prevent editing
+    input.disabled = true;
+
+    cell.appendChild(input);
+
+    return cell;
+}
+
+
+// Call the fetchAppointments function when the page loads
+//window.onload = fetchAppointments;
+//window.onload = viewConsultants;
+
+window.addEventListener('load', function () {
+    fetchAppointments();
+    viewConsultants();
+});
+
+
+
+
+
+
+function createInputCell(row, cellIndex, value, dataId, fieldName) {
+    const cell = row.insertCell(cellIndex);
+
+    if (fieldName === "status") {
+        // Create a dropdown for the status field
+        const dropdown = document.createElement("select");
+        const options = ["Pending", "Accepted", "Rejected", "Completed"];
+
+        options.forEach(optionValue => {
+            const option = document.createElement("option");
+            option.value = optionValue;
+            option.text = optionValue;
+            dropdown.appendChild(option);
+        });
+
+        dropdown.value = value; // Set the default value
+
+        dropdown.setAttribute("data-id", dataId);
+        dropdown.setAttribute("data-field", fieldName);
+
+        cell.appendChild(dropdown);
+    } else {
+        // Create input field for other columns
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = value;
+        input.setAttribute("data-id", dataId);
+        input.setAttribute("data-field", fieldName);
+
+        cell.appendChild(input);
+    }
+
+    return cell;
+}
+
+function editAppointment(appointmentId) {
+    console.log("Editing appointment with ID:", appointmentId);
+
+    const row = document.querySelector(`[data-id="${appointmentId}"]`);
+    if (!row) {
+        console.error(`Row with ID ${appointmentId} not found.`);
+        return;
+    }
+
+    // Find input fields within the row using data-id attribute
+    const inputs = row.querySelectorAll('[data-id]');
+
+    const updatedAppointment = {};
+    inputs.forEach(input => {
+        const fieldName = input.getAttribute("data-field");
+        updatedAppointment[fieldName] = input.value;
+    });
+
+    const updurl = "http://localhost:8080/REGISTER-BACKEND/resources/student/updateAppointment";
+
+    const options = {
+        method: "PUT",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify(updatedAppointment)
+    };
+
+    fetch(updurl, options)
+        .then(response => {
+            if (response.status === 200) {
+                // Display a success message
+                alert("Student successfully updated!");
+            } else {
+                // Handle other status codes here
+                alert("Student not successfully updated!");
+                throw new Error("Error: " + response.status);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
             
 
         </script>

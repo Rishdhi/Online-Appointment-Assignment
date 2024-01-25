@@ -8,8 +8,267 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <style> 
+            
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f2f2f2;
+            }
+            h1 {
+                color: #333;
+            }
+            .container {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 40px;
+                background-color: #fff;
+                margin-bottom: 40px;
+            }
+            .button {
+                padding: 10px 20px;
+                background-color: #333;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            .appointments {
+                margin-top: 20px;
+                border-collapse: collapse;
+                width: 100%;
+            }
+            .appointments th, .appointments td {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+                text-align: left;
+            }
+            .appointments th {
+                background-color: #333;
+                color: #fff;
+                margin-bottom: 40px;
+            }
+            
+
+#jobSeekerForm {
+    max-width: 400px; /* Set a maximum width for the form */
+    margin: 0 auto; /* Center the form horizontally */
+    padding: 20px; /* Add padding for spacing */
+    background-color: #fff; /* Set a background color for the form */
+    border-radius: 8px; /* Add rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
+#jobSeekerForm label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+#jobSeekerForm input,
+#jobSeekerForm select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+#jobSeekerForm button {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+            .container {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 40px;
+/*                background-color: #fff;*/
+                margin-bottom: 40px;
+                margin-left: 50px;
+                margin-top: 25px;
+            }
+            .button {
+                padding: 10px 20px;
+                background-color: #333;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            .appointments {
+                margin-top: 20px;
+                border-collapse: collapse;
+                width: 100%;
+            }
+            .appointments th, .appointments td {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+                text-align: left;
+            }
+            .appointments th {
+                background-color: #333;
+                color: #fff;
+                margin-bottom: 40px;
+            }
+
+        </style>
     </head>
     <body>
         <div>Admin</div>
+                <div class="container">
+        <h1>Consultant Page</h1>
+        <h2>Appointment Requests</h2>
+        <table class="appointments" id="appointmentsTable">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Consultant</th>
+                <th>Status</th>
+                
+            </tr>
+        </table>
+    </div>
+        
+            <script>
+            
+     // Function to fetch appointments from the server
+function fetchAppointments() {
+    // Make an API request to retrieve all appointments
+    fetch("http://localhost:8080/REGISTER-BACKEND/resources/student/fetch_appointment", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then((response) => {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error("Failed to fetch appointments");
+            }
+        })
+        .then((appointments) => {
+            // Display the appointments in the HTML table
+            displayAppointments(appointments);
+        })
+        .catch((error) => {
+            // Handle errors and display an error message
+            console.error(error);
+            showAlert("Failed to fetch appointments");
+        });
+}
+
+// Function to display appointments in the HTML table
+function displayAppointments(appointments) {
+    const table = document.getElementById("appointmentsTable");
+
+    // Clear existing rows
+    while (table.rows.length > 1) {
+        table.deleteRow(1);
+    }
+
+    // Populate the table with fetched appointments
+    appointments.forEach((appointment, index) => {
+        const row = table.insertRow(index + 1);
+        row.setAttribute("data-id", appointment.id); // Set data-id attribute
+
+        // Create and append input fields to each cell
+        createInputCell(row, 0, appointment.id, "id", "id");
+        createInputCell(row, 1, appointment.fullName, "name", "fullName");
+        createInputCell(row, 2, appointment.email, "email", "email");
+        createInputCell(row, 3, appointment.phone, "phone", "phone");
+        createInputCell(row, 4, appointment.consultant, "consultant", "consultant");
+        createInputCell(row, 5, appointment.status, "status", "status");
+
+        const actionsCell = row.insertCell(6); // Added cell for actions
+
+        // Create Delete button
+        const deleteButton = document.createElement("button");
+        deleteButton.innerHTML = "Delete";
+        deleteButton.className = "button";
+        deleteButton.onclick = function () {
+            // Call the deleteAppointment function with the appointment ID
+            const rowId = row.getAttribute("data-id");
+            deleteAppointment(rowId);
+        };
+
+        // Append Delete button to actionsCell
+        actionsCell.appendChild(deleteButton);
+    });
+}
+
+// Function to create input cells for the table
+function createInputCell(row, cellIndex, value, dataId, fieldName) {
+    const cell = row.insertCell(cellIndex);
+
+    // Create input field for all columns
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = value;
+    input.setAttribute("data-id", dataId);
+    input.setAttribute("data-field", fieldName);
+
+    // Disable input fields to prevent editing
+    input.disabled = true;
+
+    cell.appendChild(input);
+
+    return cell;
+}
+
+// Function to delete an appointment
+// ...
+
+// Function to delete an appointment
+function deleteAppointment(appointmentId) {
+    console.log("Deleting appointment with ID:", appointmentId);
+
+    //const delurl = "http://localhost:8080/REGISTER-BACKEND/resources/student/delete_appointment";
+    //const delurl = `http://localhost:8080/REGISTER-BACKEND/resources/student/${appointmentId}`;
+    const delurl = `http://localhost:8080/REGISTER-BACKEND/resources/student/delete_appointment/${appointmentId}`;
+
+
+
+    const options = {
+        method: "DELETE",
+        headers: {
+            "content-type": "application/json",
+        },
+    };
+
+    fetch(delurl, options)
+        .then(response => {
+            console.log("Delete API Response:", response);  // Log the response for debugging
+
+            if (response.status === 200) {
+                // Display a success message
+                alert("Appointment successfully deleted!");
+                // Refresh the appointments after deletion
+                //fetchAppointments();
+            } else {
+                // Handle other status codes here
+                alert("Appointment not successfully deleted!");
+                throw new Error("Error: " + response.status);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+// ...
+
+
+// Call the fetchAppointments function when the page loads
+window.onload = fetchAppointments;
+
+            
+            </script>
+        
     </body>
 </html>
