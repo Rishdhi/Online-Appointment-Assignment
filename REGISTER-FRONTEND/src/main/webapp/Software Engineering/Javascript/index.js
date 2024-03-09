@@ -473,18 +473,24 @@ function createUserForAuthentication(email, password, userType) {
 
 
 
+// Factory function to create a consultant object
+function createConsultant(date, time, name) {
+    return {
+        date: date,
+        time: time,
+        name: name
+    };
+}
+
+// Function to add a consultant
 function addConsultant() {
     const date = document.getElementById("date").value;
     const time = document.getElementById("time").value;
     const name = document.getElementById("jobSeeker").value;
 
-    // Create a consultant object to send to the server
-    const consultant = {
-        date: date,
-        time: time,
-        name: name
-    };
-    
+    // Use the factory function to create a consultant object
+    const consultant = createConsultant(date, time, name);
+
     console.log("Consultant Object:", consultant);
 
     // Make an API request to add the consultant
@@ -495,13 +501,15 @@ function addConsultant() {
         },
         body: JSON.stringify(consultant),
     })
-    .then((response) => {
-        if (response.status === 201) {
-            alert("Consultant Added Successfully!");
-            // Consultant added successfully, handle any further actions
+    .then((response) => response.json())
+    .then((data) => {
+        if (data.status === "success") {
+            // Display a success message
+            alert("You successfully saved your date and time!");
+            // Handle any further actions
         } else {
-            alert("Failed to Add Consultant!");
-            // Failed to add consultant, display an error message
+            // Display an error message
+            alert("Failed to save date and time. Please try again.");
         }
     })
     .catch((error) => {
@@ -509,8 +517,6 @@ function addConsultant() {
         console.error(error);
     });
 }
-
-
 
 
 

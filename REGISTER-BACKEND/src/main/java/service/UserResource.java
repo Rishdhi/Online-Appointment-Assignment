@@ -335,26 +335,53 @@ public Response addUser(String json) {
     
     
     
-    @POST
-    @Path("/addConsultant")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response addConsultant(String json) {
-        Gson gson = new GsonBuilder().create();
-        Consultants consultant = gson.fromJson(json, Consultants.class);
+//    @POST
+//    @Path("/addConsultant")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public Response addConsultant(String json) {
+//        Gson gson = new GsonBuilder().create();
+//        Consultants consultant = gson.fromJson(json, Consultants.class);
+//
+//        DBUtils utils = new DBUtils();
+//        boolean result;
+//        result = utils.addConsultant(consultant);
+//        if (result) {
+//            String successMessage = "You successfully saved your date and time";
+//            return Response.status(Response.Status.CREATED)
+//                    .entity(successMessage)
+//                    .build();
+//        } else {
+//            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+//                    .build();
+//        }
+//    }
 
-        DBUtils utils = new DBUtils();
-        boolean result;
-        result = utils.addConsultant(consultant);
-        if (result) {
-            String successMessage = "You successfully saved your date and time";
-            return Response.status(Response.Status.CREATED)
-                    .entity(successMessage)
-                    .build();
-        } else {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                    .build();
-        }
+
+
+@POST
+@Path("/addConsultant")
+@Consumes(MediaType.APPLICATION_JSON)
+public Response addConsultant(String json) {
+    Gson gson = new GsonBuilder().create();
+    Consultants consultant = gson.fromJson(json, Consultants.class);
+
+    // Use the factory method to create a Consultants instance
+    Consultants newConsultant = Consultants.createConsultant(consultant.getId(), consultant.getDate(), consultant.getTime(), consultant.getName());
+
+    DBUtils utils = new DBUtils();
+    boolean result = utils.addConsultant(newConsultant);
+
+    if (result) {
+        String successMessage = "You successfully saved your date and time!";
+        return Response.status(Response.Status.CREATED)
+                .entity(successMessage)
+                .build();
+    } else {
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                .build();
     }
+}
+
     
     
     

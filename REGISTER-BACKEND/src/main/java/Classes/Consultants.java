@@ -9,6 +9,17 @@ package Classes;
  * @author rishi
  */
 public class Consultants {
+    
+
+    
+        public static Consultants createConsultant(int id, String date, String time, String name) {
+        Consultants newConsultant = new Consultants();
+        newConsultant.setId(id);
+        newConsultant.setDate(date);
+        newConsultant.setTime(time);
+        newConsultant.setName(name);
+        return newConsultant;
+    }
 
     public int getId() {
         return id;
@@ -46,5 +57,7 @@ public class Consultants {
     private String date;
     private String time;
     private String name;
+    
+    
     
 }
