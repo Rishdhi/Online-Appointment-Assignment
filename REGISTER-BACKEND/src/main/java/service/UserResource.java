@@ -196,13 +196,52 @@ public class UserResource {
     
     
     
+//@POST
+//@Path("authenticate")
+//@Consumes(MediaType.APPLICATION_JSON)
+//public Response authenticateUser(User user) {
+//    if (DBUtils.authenticateUser(user)) {
+//        // Authentication successful
+//        String userType = user.getUser_type();
+//        String redirectUrl;
+//
+//        if ("Administrator".equals(userType)) {
+//            redirectUrl = "admin_dashboard.html";
+//        } else if ("Consultant".equals(userType)) {
+//            redirectUrl = "consultant_dashboard.html";
+//        } else if ("Job Seeker".equals(userType)) {
+//            redirectUrl = "job_seeker_dashboard.html";
+//        } else {
+//            // Handle unknown user types here
+//            return Response.status(Response.Status.UNAUTHORIZED)
+//                    .entity("Unknown user type")
+//                    .build();
+//        }
+//
+//        // Return a JSON response with the redirect URL and success message
+//        return Response.status(Response.Status.OK)
+//                .entity("{\"status\":\"success\",\"message\":\"Logged in successfully\",\"redirect\":\"" + redirectUrl + "\"}")
+//                .build();
+//    } else {
+//        // Authentication failed
+//        return Response.status(Response.Status.UNAUTHORIZED)
+//                .entity("{\"status\":\"fail\",\"message\":\"Failed to login\"}")
+//                .build();
+//    }
+//}
+    
+    
+    
+    
     @POST
 @Path("authenticate")
 @Consumes(MediaType.APPLICATION_JSON)
 public Response authenticateUser(User user) {
-    if (DBUtils.authenticateUser(user)) {
+    User authenticatedUser = User.createUserForAuthentication(user.getEmail(), user.getPassword(), user.getUser_type());
+
+    if (DBUtils.authenticateUser(authenticatedUser)) {
         // Authentication successful
-        String userType = user.getUser_type();
+        String userType = authenticatedUser.getUser_type();
         String redirectUrl;
 
         if ("Administrator".equals(userType)) {

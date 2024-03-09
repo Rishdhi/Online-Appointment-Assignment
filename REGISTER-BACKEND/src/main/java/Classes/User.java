@@ -79,6 +79,18 @@ public class User {
         user.setUser_type(user_type);
         return user;
     }
+        
+        
+        
+        
+    // Factory method for creating a User instance for authentication
+        public static User createUserForAuthentication(String email, String password, String user_type) {
+        User user = new User();
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setUser_type(user_type);
+        return user;
+    }
 
     
 

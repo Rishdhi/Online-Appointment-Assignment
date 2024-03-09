@@ -422,44 +422,50 @@ function addUser() {
 //
 //
 //
-//function login() {
-//    const email = document.getElementById("log-email").value;
-//    const password = document.getElementById("log-password").value;
-//    const userType = document.getElementById("log-loginUserType").value;
-//
-//    // Create a user object to send to the server
-//    const user = {
-//        email: email,
-//        password: password,
-//        user_type: userType
-//    };
-//
-//    // Make an API request to authenticate the user
-//    fetch("http://localhost:8080/REGISTER-BACKEND/resources/student/authenticate", {
-//        method: "POST",
-//        headers: {
-//            "Content-Type": "application/json",
-//        },
-//        body: JSON.stringify(user),
-//    })
-//    .then((response) => response.json())
-//    .then((data) => {
-//        if (data.status === "success") {
-//            // Authentication was successful, display the success message
-//            alert(data.message);
-//            // Handle the redirection here
-//            window.location.href = data.redirect;
-//        } else {
-//            // Authentication failed, display the error message
-//            alert(data.message);
-//            throw new Error(data.message);
-//        }
-//    })
-//    .catch((error) => {
-//        // Handle errors and display an error message
-//        console.error(error);
-//    });
-//}
+function login() {
+    const email = document.getElementById("log-email").value;
+    const password = document.getElementById("log-password").value;
+    const userType = document.getElementById("log-loginUserType").value;
+
+    // Create a user object using the factory method
+    const user = createUserForAuthentication(email, password, userType);
+
+    // Make an API request to authenticate the user
+    fetch("http://localhost:8080/REGISTER-BACKEND/resources/student/authenticate", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        if (data.status === "success") {
+            // Authentication was successful, display the success message
+            alert(data.message);
+            // Handle the redirection here
+            window.location.href = data.redirect;
+        } else {
+            // Authentication failed, display the error message
+            alert(data.message);
+            throw new Error(data.message);
+        }
+    })
+    .catch((error) => {
+        // Handle errors and display an error message
+        console.error(error);
+    });
+}
+
+// Factory method for creating a User instance for authentication
+function createUserForAuthentication(email, password, userType) {
+    return {
+        email: email,
+        password: password,
+        user_type: userType
+    };
+}
+
 
 
 
