@@ -65,6 +65,20 @@ public class User {
     private String email;
     private String password;
     private String user_type;
+    
+    
+    // FACTORY METHOD
+    
+        public static User createUser(int id, String username, int contact_number, String email, String password, String user_type) {
+        User user = new User();
+        user.setId(id);
+        user.setUsername(username);
+        user.setContact_number(contact_number);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setUser_type(user_type);
+        return user;
+    }
 
     
 

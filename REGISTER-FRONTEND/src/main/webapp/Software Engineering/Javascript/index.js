@@ -211,7 +211,7 @@
 
 
 //const url = "http://localhost:8080/API-DATA-TESTING-BACKEND/resources/student/addUser";
-//
+
 //const addurl = "http://localhost:8080/REGISTER-BACKEND/resources/student/addUser";
 //
 //function addUser() {
@@ -256,6 +256,42 @@
 
 //
 //
+
+
+
+// FACTORY METHOD
+
+
+function addUser() {
+    const user = User.createUser(
+        document.getElementById("name").value,
+        document.getElementById("txtNum").value,
+        document.getElementById("txtMail").value,
+        document.getElementById("txtPass").value,
+        document.getElementById("signupUserType").value
+    );
+
+    // Send the user object as JSON to the server
+    fetch("http://localhost:8080/REGISTER-BACKEND/resources/user/addUser", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+    .then(response => {
+        if (response.status === 201) {
+            alert('User added successfully.');
+        } else {
+            alert('Failed to add user.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
 //document.addEventListener("DOMContentLoaded", function () {
 //    // Your JavaScript code for adding a user here
 //

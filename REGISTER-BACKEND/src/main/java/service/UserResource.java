@@ -16,7 +16,6 @@ import javax.ws.rs.PUT;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.core.MediaType;
 import Classes.User;
-import Classes.User_Cyber_Security;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -234,86 +233,66 @@ public Response authenticateUser(User user) {
     
     
     
-    
-    @POST
-    @Path("authenticate_cyber_user")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response authenticateCyberUser(User_Cyber_Security cyber_user) {
-        if (DBUtils.authenticateCyberUser(cyber_user)) {
-        // Authentication successful
-        String userType = cyber_user.getCuser_type();
-        String redirectUrl;
-
-        if ("Administrator".equals(userType)) {
-            redirectUrl = "admin_dashboard.html";
-        } else if ("Consultant".equals(userType)) {
-            redirectUrl = "Cyber_consultant_dashboard.html";
-        } else if ("Job Seeker".equals(userType)) {
-            redirectUrl = "Cyber_job_seeker.html";
-        } else {
-            // Handle unknown user types here
-            return Response.status(Response.Status.UNAUTHORIZED)
-                    .entity("Unknown user type")
-                    .build();
-        }
-
-        // Return a JSON response with the redirect URL
-        return Response.status(Response.Status.OK)
-                .entity("{\"redirect\":\"" + redirectUrl + "\"}")
-                .build();
-    } else {
-        // Authentication failed
-        return Response.status(Response.Status.UNAUTHORIZED)
-                .entity("Login failed by api")
-                .build();
-    }
-    }
-    
-    
-    
-    
-    
-    
 
      //.Add a new method to handle saving a student
-    @POST
-    @Path("/addUser")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response addUser(String json) {
-        Gson gson = new GsonBuilder().create();
-        User user = gson.fromJson(json, User.class);
-        
-        DBUtils utils = new DBUtils(); 
-        boolean result = utils.addUser(user);
-        if (result) {
-            String successMessage = "User successfully added!";
-            return Response.status(201).build();
-        } else {
-            return Response.status(500).build();
-        }
-    }
-    
-    
-    
-    
-         //.Add a new method to handle saving a cyber security user
-    @POST
-    @Path("/addcyberuser")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response addCyberSecurityUser(String json) {
-        Gson gson = new GsonBuilder().create();
-        User_Cyber_Security user = gson.fromJson(json, User_Cyber_Security.class);
-        
-        DBUtils utils = new DBUtils(); 
-        boolean result = utils.addCyberSecurityUser(user);
-        if (result) {
-            String successMessage = "User successfully added!";
-            return Response.status(201).build();
-        } else {
-            return Response.status(500).build();
-        }
-    }
+//    @POST
+//    @Path("/addUser")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public Response addUser(String json) {
+//        Gson gson = new GsonBuilder().create();
+//        User user = gson.fromJson(json, User.class);
+//        
+//        DBUtils utils = new DBUtils(); 
+//        boolean result = utils.addUser(user);
+//        if (result) {
+//            String successMessage = "User successfully added!";
+//            return Response.status(201).build();
+//        } else {
+//            return Response.status(500).build();
+//        }
+//    }
 
+
+//    @POST
+//    @Path("/addUser")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public Response addUser(String json) {
+//        Gson gson = new GsonBuilder().create();
+//        User user = gson.fromJson(json, User.class);
+//
+//        // Use the factory method to create a User instance
+//        User newUser = User.createUser(user.getId(), user.getUsername(), user.getContact_number(), user.getEmail(), user.getPassword(), user.getUser_type());
+//
+//        DBUtils utils = new DBUtils();
+//        boolean result = utils.addUser(newUser);
+//        if (result) {
+//            return Response.status(201).build();
+//        } else {
+//            return Response.status(500).build();
+//        }
+//    }
+
+
+// FACTORY METHOD
+
+@POST
+@Path("/addUser")
+@Consumes(MediaType.APPLICATION_JSON)
+public Response addUser(String json) {
+    Gson gson = new GsonBuilder().create();
+    User user = gson.fromJson(json, User.class);
+
+    // Use the factory method to create a User instance
+    User newUser = User.createUser(user.getId(), user.getUsername(), user.getContact_number(), user.getEmail(), user.getPassword(), user.getUser_type());
+
+    DBUtils utils = new DBUtils();
+    boolean result = utils.addUser(newUser);
+    if (result) {
+        return Response.status(201).entity("User registered successfully").build();
+    } else {
+        return Response.status(500).entity("User not registered").build();
+    }
+}
     
     
     
